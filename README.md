@@ -1,17 +1,12 @@
 ## graphQL server
 
-to start server: 
+to start server:
 
 - `cd server`
 - `yarn install`
 - `yarn start`
 
-Userful queries in GraphiQL interface: 
+query and mutation formats:
 
-query {
-  messages {
-    id
-    content
-    user
-  }
-}
+- `query { messages { id content user } }`
+- `mutation { postMessage(user: "Jack", content: "Hello from Jack")`

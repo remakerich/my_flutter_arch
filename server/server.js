@@ -1,11 +1,9 @@
-const { createServer } = require('@graphql-yoga/node');
-const { type } = require('os');
+const { createServer } = require("@graphql-yoga/node");
 
 // Database:
 const messages = [];
 
-// schemas:
-// exclamation mark means field is required 
+// exclamation mark means field is required
 const types = `
     type Message {
         id: ID!
@@ -16,16 +14,34 @@ const types = `
     type Query {
         messages: [Message!]
     }
+
+    type Mutation {
+        postMessage(user: String!, content: String!): ID!
+    }
 `;
 
 const resolvers = {
-     Query: {
-         messages: ()=> messages,
-     }
-}
+  Query: {
+    messages: () => messages,
+  },
+  Mutation: {
+    postMessage: (parent, { user, content }) => {
+      const id = messages.length;
+      messages.push({
+        id,
+        user,
+        content,
+      });
+      return id;
+    },
+  },
+};
 
-const server = createServer({schema: {
+const server = createServer({
+  schema: {
     typeDefs: types,
-     resolvers: resolvers}})
+    resolvers: resolvers,
+  },
+});
 
-server.start()
+server.start();

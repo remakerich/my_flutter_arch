@@ -9,4 +9,4 @@ to start server:
 query and mutation formats:
 
 - `query { messages { id content user } }`
-- `mutation { postMessage(user: "Jack", content: "Hello from Jack")`
+- `mutation { postMessage(user: "Jack", content: "Hello from Jack") }`

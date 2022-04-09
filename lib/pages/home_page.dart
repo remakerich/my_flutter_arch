@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:graphql_test_new/services/chat_service.dart';
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -11,7 +12,16 @@ class MyHomePage extends StatelessWidget {
           'GraphQL chat + Riverpod',
         ),
       ),
-      body: const SizedBox(),
+      body: FutureBuilder(
+        future: ChatService.getAllMessages(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return const Center(child: CircularProgressIndicator());
+          } else {
+            return Text(snapshot.data.toString());
+          }
+        },
+      ),
     );
   }
 }

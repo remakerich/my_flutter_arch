@@ -49,3 +49,11 @@ app.*.map.json
 server/yarn.lock
 server/node_modules/
 server/node_modules/*
+
+# Generated files
+lib/generated/
+lib/generated_plugin_registrant.dart
+
+**/*.g.dart
+**/*.freezed.dart
+**/*.config.dart

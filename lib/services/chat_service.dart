@@ -3,27 +3,17 @@ import 'dart:io';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 class ChatService {
-  static get _serverWebSocket {
-    late final String hostname;
-
-    if (Platform.isAndroid) {
-      hostname = '10.0.2.2';
-    } else {
-      hostname = 'localhost';
-    }
-
-    return 'ws://$hostname:4000';
-  }
+  static get _url => Platform.isAndroid ? 'ws://10.0.2.2:4000' : 'ws://localhost:4000';
 
   static final _client = GraphQLClient(
-    link: WebSocketLink(_serverWebSocket),
+    link: WebSocketLink(_url),
     cache: GraphQLCache(),
   );
 
   static Future<QueryResult> getAllMessages() async {
     return await _client.query(
       QueryOptions(
-        document: gql(GQLdocs.getAllMessages),
+        document: gql(GqlDocs.getAllMessages),
       ),
     );
   }
@@ -34,7 +24,7 @@ class ChatService {
   ) async {
     return await _client.mutate(
       MutationOptions(
-        document: gql(GQLdocs.postMessage(userName, message)),
+        document: gql(GqlDocs.postMessage(userName, message)),
       ),
     );
   }
@@ -43,14 +33,14 @@ class ChatService {
     return _client.subscribe(
       SubscriptionOptions(
         document: gql(
-          GQLdocs.subscribe,
+          GqlDocs.subscribe,
         ),
       ),
     );
   }
 }
 
-class GQLdocs {
+class GqlDocs {
   static const getAllMessages = '''
     query { 
       messages { 

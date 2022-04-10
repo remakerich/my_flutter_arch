@@ -45,5 +45,7 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
+# node modules
+server/yarn.lock
 server/node_modules/
 server/node_modules/*

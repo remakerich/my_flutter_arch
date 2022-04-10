@@ -1,17 +1,17 @@
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 class ChatService {
-  static const _serverUrl = 'http://10.0.2.2:4000';
+  static const _serverUrl = 'ws://10.0.2.2:4000';
 
   static final _client = GraphQLClient(
-    link: HttpLink(_serverUrl),
+    link: WebSocketLink(_serverUrl),
     cache: GraphQLCache(),
   );
 
   static Future<QueryResult> getAllMessages() async {
     return await _client.query(
       QueryOptions(
-        document: gql(GQLqueries.getAllMessages),
+        document: gql(GQLdocs.getAllMessages),
       ),
     );
   }
@@ -22,13 +22,23 @@ class ChatService {
   ) async {
     return await _client.mutate(
       MutationOptions(
-        document: gql(GQLqueries.postMessage(userName, message)),
+        document: gql(GQLdocs.postMessage(userName, message)),
+      ),
+    );
+  }
+
+  static Stream<QueryResult> subscribeToChat() {
+    return _client.subscribe(
+      SubscriptionOptions(
+        document: gql(
+          GQLdocs.subscribe,
+        ),
       ),
     );
   }
 }
 
-class GQLqueries {
+class GQLdocs {
   static const getAllMessages = '''
     query { 
       messages { 
@@ -42,6 +52,16 @@ class GQLqueries {
   static String postMessage(String userName, String message) => '''
     mutation {
       postMessage(user: "$userName", content: "$message")
+    }
+  ''';
+
+  static const subscribe = '''
+    subscription { 
+      messages { 
+        id 
+        content 
+        user 
+      } 
     }
   ''';
 }

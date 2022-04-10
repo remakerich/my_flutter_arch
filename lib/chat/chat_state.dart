@@ -8,7 +8,8 @@ class ChatState with _$ChatState {
 
   const factory ChatState.failure() = ChatFailure;
 
-  const factory ChatState.success(
-    List<Message> messages,
-  ) = ChatSuccess;
+  const factory ChatState.success({
+    required List<Message> messages,
+    required String userName,
+  }) = ChatSuccess;
 }

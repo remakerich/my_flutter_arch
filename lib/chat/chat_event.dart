@@ -8,6 +8,10 @@ class ChatEvent with _$ChatEvent {
     List<Message> messages,
   ) = ChatSynced;
 
+   const factory ChatEvent.userNameChanged(
+    String userName,
+  ) = ChatUserNameChanged;
+
   const factory ChatEvent.messagePosted({
     required String user,
     required String content,

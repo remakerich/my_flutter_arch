@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:graphql_test_new/services/chat_service.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -12,7 +13,7 @@ class MyHomePage extends StatelessWidget {
           'GraphQL chat + Riverpod',
         ),
       ),
-      body: FutureBuilder(
+      body: FutureBuilder<QueryResult>(
         future: ChatService.getAllMessages(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {

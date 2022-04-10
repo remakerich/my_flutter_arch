@@ -1,7 +1,7 @@
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 class ChatService {
-  static const _serverUrl = 'http://10.0.2.2:4000/graphql';
+  static const _serverUrl = 'http://10.0.2.2:4000';
 
   static final _client = GraphQLClient(
     link: HttpLink(_serverUrl),

@@ -10,3 +10,4 @@ query and mutation formats:
 
 - `query { messages { id content user } }`
 - `mutation { postMessage(user: "Jack", content: "Hello from Jack") }`
+- `subscription { messages { id content user } }`

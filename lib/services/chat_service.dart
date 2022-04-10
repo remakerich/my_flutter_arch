@@ -1,10 +1,22 @@
+import 'dart:io';
+
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 class ChatService {
-  static const _serverUrl = 'ws://10.0.2.2:4000';
+  static get _serverWebSocket {
+    late final String hostname;
+
+    if (Platform.isAndroid) {
+      hostname = '10.0.2.2';
+    } else {
+      hostname = 'localhost';
+    }
+
+    return 'ws://$hostname:4000';
+  }
 
   static final _client = GraphQLClient(
-    link: WebSocketLink(_serverUrl),
+    link: WebSocketLink(_serverWebSocket),
     cache: GraphQLCache(),
   );
 

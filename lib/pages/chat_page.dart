@@ -1,124 +1,100 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:graphql_test_new/chat/chat_bloc.dart';
-import 'package:graphql_test_new/injection/injection.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:graphql_test_new/chat_riverpod/chat_notifier.dart';
 
 class ChatPage extends StatelessWidget {
   const ChatPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (_) => getIt<ChatBloc>()..add(const ChatStarted()),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.blueGrey,
+        elevation: 0,
+        centerTitle: true,
+        title: const Text(
+          'GraphQL chat + Riverpod',
         ),
-      ],
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.blueGrey,
-          elevation: 0,
-          centerTitle: true,
-          title: const Text(
-            'GraphQL chat + Riverpod',
+      ),
+      body: Column(
+        children: const [
+          Expanded(
+            child: _MessagesList(),
           ),
-        ),
-        body: Column(
-          children: const [
-            Expanded(
-              child: _MessagesList(),
-            ),
-            _InputArea()
-          ],
-        ),
+          _InputArea()
+        ],
       ),
     );
   }
 }
 
-class _MessagesList extends StatelessWidget {
+class _MessagesList extends ConsumerWidget {
   const _MessagesList({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<ChatBloc, ChatState>(
-      buildWhen: (_, state) => state is ChatSuccess,
-      builder: (context, state) {
-        return state.maybeMap(
-          success: (state) {
-            return ListView.builder(
-              physics: const BouncingScrollPhysics(),
-              padding: EdgeInsets.zero,
-              reverse: true,
-              itemCount: state.messages.length,
-              itemBuilder: (context, index) {
-                final message = state.messages[index];
-                final isMe = state.userName == message.user;
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(chatNotifierProvider);
 
-                return Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
-                  child: Row(
-                    mainAxisAlignment: isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
-                    children: [
-                      if (!isMe) ...{
+    return state.maybeMap(
+      success: (state) {
+        return ListView.builder(
+          physics: const BouncingScrollPhysics(),
+          padding: EdgeInsets.zero,
+          reverse: true,
+          itemCount: state.messages.length,
+          itemBuilder: (context, index) {
+            final message = state.messages[index];
+            final isMe = state.userName == message.user;
+
+            return Padding(
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+              child: Row(
+                mainAxisAlignment: isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
+                children: [
+                  if (!isMe) ...{
+                    Text(
+                      '${message.user}:',
+                    ),
+                    const SizedBox(width: 10),
+                  },
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: isMe ? Colors.green : Colors.grey,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Row(
+                      children: [
                         Text(
-                          '${message.user}:',
+                          message.content,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            color: Colors.white,
+                          ),
                         ),
-                        const SizedBox(width: 10),
-                      },
-                      Container(
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          color: isMe ? Colors.green : Colors.grey,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Row(
-                          children: [
-                            Text(
-                              message.content,
-                              style: const TextStyle(
-                                fontSize: 16,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                );
-              },
+                ],
+              ),
             );
           },
-          orElse: () => const Center(
-            child: Text('Loading chat'),
-          ),
         );
       },
+      orElse: () => const Center(
+        child: Text('Loading chat'),
+      ),
     );
   }
 }
 
-class _InputArea extends StatefulWidget {
+class _InputArea extends ConsumerWidget {
   const _InputArea({Key? key}) : super(key: key);
 
   @override
-  State<_InputArea> createState() => _InputAreaState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final chatNotifier = ref.watch(chatNotifierProvider.notifier);
 
-class _InputAreaState extends State<_InputArea> {
-  final _userNameController = TextEditingController();
-  final _messageController = TextEditingController();
-
-  @override
-  void dispose() {
-    _userNameController.dispose();
-    _messageController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return Container(
       color: Colors.blueGrey,
       child: SafeArea(
@@ -128,14 +104,14 @@ class _InputAreaState extends State<_InputArea> {
               flex: 1,
               child: _TextField(
                 hint: 'Username',
-                controller: _userNameController,
+                controller: chatNotifier.userNameController,
               ),
             ),
             Expanded(
               flex: 2,
               child: _TextField(
                 hint: 'Message',
-                controller: _messageController,
+                controller: chatNotifier.messageController,
               ),
             ),
             Container(
@@ -145,11 +121,7 @@ class _InputAreaState extends State<_InputArea> {
                   Icons.keyboard_double_arrow_up_rounded,
                 ),
                 onTap: () {
-                  final event = ChatMessagePosted(
-                    user: _userNameController.text,
-                    content: _messageController.text,
-                  );
-                  context.read<ChatBloc>().add(event);
+                  ref.read(chatNotifierProvider.notifier).messagePosted();
                 },
               ),
             )
@@ -160,7 +132,7 @@ class _InputAreaState extends State<_InputArea> {
   }
 }
 
-class _TextField extends StatelessWidget {
+class _TextField extends ConsumerWidget {
   const _TextField({
     Key? key,
     required this.hint,
@@ -171,7 +143,7 @@ class _TextField extends StatelessWidget {
   final TextEditingController controller;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       height: 40,
       alignment: Alignment.center,
@@ -188,8 +160,7 @@ class _TextField extends StatelessWidget {
           if (hint != 'Username') {
             return;
           }
-          final event = ChatUserNameChanged(value);
-          context.read<ChatBloc>().add(event);
+          ref.read(chatNotifierProvider.notifier).userNameChanged();
         },
         cursorColor: Colors.black,
         cursorWidth: 1,

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:graphql_test_new/injection/injection.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:graphql_test_new/pages/chat_page.dart';
 
 void main() {
-  initializeDependencies();
-  runApp(const MyApp());
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

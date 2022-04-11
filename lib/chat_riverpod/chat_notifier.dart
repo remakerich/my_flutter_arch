@@ -64,5 +64,6 @@ class ChatNotifier extends StateNotifier<ChatState> {
       userNameController.text,
       messageController.text,
     );
+    messageController.clear();
   }
 }

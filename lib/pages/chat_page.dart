@@ -33,7 +33,7 @@ class _MessagesList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(chatNotifierProvider);
+    final state = ref.watch(chatProvider);
 
     return state.maybeMap(
       data: (state) {
@@ -95,7 +95,7 @@ class _InputArea extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final chatNotifier = ref.watch(chatNotifierProvider.notifier);
+    final chatNotifier = ref.watch(chatProvider.notifier);
 
     return Container(
       color: Colors.blueGrey,
@@ -123,7 +123,7 @@ class _InputArea extends ConsumerWidget {
                   Icons.keyboard_double_arrow_up_rounded,
                 ),
                 onTap: () {
-                  ref.read(chatNotifierProvider.notifier).messagePosted();
+                  ref.read(chatProvider.notifier).messagePosted();
                 },
               ),
             )
@@ -162,7 +162,7 @@ class _TextField extends ConsumerWidget {
           if (hint != 'Username') {
             return;
           }
-          ref.read(chatNotifierProvider.notifier).userNameChanged();
+          ref.read(chatProvider.notifier).userNameChanged();
         },
         cursorColor: Colors.black,
         cursorWidth: 1,

@@ -8,8 +8,8 @@ import 'package:graphql_test_new/models/message.dart';
 import 'package:graphql_test_new/services/chat_service.dart';
 import 'package:injectable/injectable.dart';
 
-final chatNotifierProvider = StateNotifierProvider<ChatNotifier, AsyncValue<Chat>>(
-  (ref) => getIt<ChatNotifier>()..started(ref)
+final chatProvider = StateNotifierProvider<ChatNotifier, AsyncValue<Chat>>(
+  (ref) => getIt<ChatNotifier>()..started(ref),
 );
 
 @injectable

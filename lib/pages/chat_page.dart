@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:graphql_test_new/chat_riverpod/chat_notifier.dart';
+import 'package:graphql_test_new/chat_riverpod/chat_state.dart';
+import 'package:graphql_test_new/injection/injection.dart';
+
+final chatNotifierProvider = StateNotifierProvider<ChatNotifier, ChatState>(
+  (ref) => getIt<ChatNotifier>()..started(),
+);
 
 class ChatPage extends StatelessWidget {
   const ChatPage({Key? key}) : super(key: key);

@@ -3,14 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:graphql_test_new/chat_riverpod/chat_state.dart';
-import 'package:graphql_test_new/injection/injection.dart';
 import 'package:graphql_test_new/models/message.dart';
 import 'package:graphql_test_new/services/chat_service.dart';
 import 'package:injectable/injectable.dart';
-
-final chatNotifierProvider = StateNotifierProvider<ChatNotifier, ChatState>(
-  (ref) => getIt<ChatNotifier>()..started(),
-);
 
 @injectable
 class ChatNotifier extends StateNotifier<ChatState> {

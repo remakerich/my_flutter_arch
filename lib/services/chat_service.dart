@@ -1,7 +1,11 @@
 import 'dart:io';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:injectable/injectable.dart';
 
+@LazySingleton()
 class ChatService {
+  const ChatService();
+
   static get _url => Platform.isAndroid ? 'ws://10.0.2.2:4000' : 'ws://localhost:4000';
 
   static final _client = GraphQLClient(
@@ -9,7 +13,7 @@ class ChatService {
     cache: GraphQLCache(),
   );
 
-  static Future<QueryResult> getAllMessages() async {
+  Future<QueryResult> getAllMessages() async {
     return await _client.query(
       QueryOptions(
         document: gql(GqlDocs.getAllMessages),
@@ -17,7 +21,7 @@ class ChatService {
     );
   }
 
-  static Future<QueryResult> postMessage(
+  Future<QueryResult> postMessage(
     String userName,
     String message,
   ) async {
@@ -28,7 +32,7 @@ class ChatService {
     );
   }
 
-  static Stream<QueryResult> subscribeToChat() {
+  Stream<QueryResult> subscribeToChat() {
     return _client.subscribe(
       SubscriptionOptions(
         document: gql(

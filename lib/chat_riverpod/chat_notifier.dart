@@ -3,21 +3,27 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:graphql_test_new/chat_riverpod/chat_state.dart';
+import 'package:graphql_test_new/injection/injection.dart';
 import 'package:graphql_test_new/models/message.dart';
 import 'package:graphql_test_new/services/chat_service.dart';
+import 'package:injectable/injectable.dart';
 
 final chatNotifierProvider = StateNotifierProvider<ChatNotifier, ChatState>(
-  (ref) => ChatNotifier()..started(),
+  (ref) => getIt<ChatNotifier>()..started(),
 );
 
+@injectable
 class ChatNotifier extends StateNotifier<ChatState> {
-  ChatNotifier() : super(const ChatState.initial());
+  ChatNotifier(
+    this._chatService,
+  ) : super(const ChatState.initial());
 
   StreamSubscription? _chatSubscription;
   String _userName = '';
   List<Message> _messages = [];
   final userNameController = TextEditingController();
   final messageController = TextEditingController();
+  final ChatService _chatService;
 
   @override
   Future<void> dispose() async {
@@ -30,7 +36,7 @@ class ChatNotifier extends StateNotifier<ChatState> {
   void started() {
     state = const ChatState.loading();
 
-    _chatSubscription = ChatService.subscribeToChat().listen(
+    _chatSubscription = _chatService.subscribeToChat().listen(
       (event) {
         final messages = <Message>[];
         event.data!['messages'].forEach(
@@ -60,7 +66,7 @@ class ChatNotifier extends StateNotifier<ChatState> {
   }
 
   void messagePosted() {
-    ChatService.postMessage(
+    _chatService.postMessage(
       userNameController.text,
       messageController.text,
     );

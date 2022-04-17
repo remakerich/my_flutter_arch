@@ -8,7 +8,7 @@ import 'package:graphql_test_new/models/message.dart';
 import 'package:graphql_test_new/services/chat_service.dart';
 import 'package:injectable/injectable.dart';
 
-final chatProvider = StateNotifierProvider<ChatNotifier, AsyncValue<Chat>>(
+final chatProvider = StateNotifierProvider.autoDispose<ChatNotifier, AsyncValue<Chat>>(
   (ref) => getIt<ChatNotifier>()..started(ref),
 );
 
@@ -24,7 +24,6 @@ class ChatNotifier extends StateNotifier<AsyncValue<Chat>> {
   final userNameController = TextEditingController();
   final messageController = TextEditingController();
   final ChatService _chatService;
-  late final Ref _ref;
 
   @override
   Future<void> dispose() async {
@@ -35,7 +34,6 @@ class ChatNotifier extends StateNotifier<AsyncValue<Chat>> {
   }
 
   void started(Ref ref) {
-    _ref = ref;
     state = const AsyncLoading();
 
     _chatSubscription = _chatService.subscribeToChat().listen(

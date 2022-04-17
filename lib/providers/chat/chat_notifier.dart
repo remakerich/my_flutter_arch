@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:graphql_test_new/controllers/chat/chat_state.dart';
 import 'package:graphql_test_new/models/message.dart';
+import 'package:graphql_test_new/providers/chat/chat_state.dart';
 import 'package:graphql_test_new/services/chat_service.dart';
 import 'package:injectable/injectable.dart';
 

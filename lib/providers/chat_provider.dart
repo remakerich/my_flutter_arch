@@ -12,7 +12,7 @@ final chatProvider = StateNotifierProvider.autoDispose<ChatNotifier, AsyncValue<
   (ref) => getIt<ChatNotifier>()..started(ref),
 );
 
-@injectable
+@LazySingleton()
 class ChatNotifier extends StateNotifier<AsyncValue<Chat>> {
   ChatNotifier(
     this._chatService,
@@ -40,10 +40,9 @@ class ChatNotifier extends StateNotifier<AsyncValue<Chat>> {
       (event) {
         final messages = <Message>[];
         event.data!['messages'].forEach(
-          (message) {
-            final parsedMessage = Message.fromJson(message);
-            messages.add(parsedMessage);
-          },
+          (message) => messages.add(
+            Message.fromJson(message),
+          ),
         );
 
         _messages = messages.reversed.toList();

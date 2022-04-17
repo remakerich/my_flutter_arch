@@ -2,16 +2,21 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:graphql_test_new/injection/injection.dart';
+import 'package:graphql_test_new/models/chat.dart';
 import 'package:graphql_test_new/models/message.dart';
-import 'package:graphql_test_new/providers/chat/chat_state.dart';
 import 'package:graphql_test_new/services/chat_service.dart';
 import 'package:injectable/injectable.dart';
 
+final chatNotifierProvider = StateNotifierProvider<ChatNotifier, AsyncValue<Chat>>(
+  (ref) => getIt<ChatNotifier>()..started(ref)
+);
+
 @injectable
-class ChatNotifier extends StateNotifier<ChatState> {
+class ChatNotifier extends StateNotifier<AsyncValue<Chat>> {
   ChatNotifier(
     this._chatService,
-  ) : super(const ChatState.initial());
+  ) : super(const AsyncLoading());
 
   StreamSubscription? _chatSubscription;
   String _userName = '';
@@ -31,7 +36,7 @@ class ChatNotifier extends StateNotifier<ChatState> {
 
   void started(Ref ref) {
     _ref = ref;
-    state = const ChatState.loading();
+    state = const AsyncLoading();
 
     _chatSubscription = _chatService.subscribeToChat().listen(
       (event) {
@@ -45,10 +50,10 @@ class ChatNotifier extends StateNotifier<ChatState> {
 
         _messages = messages.reversed.toList();
 
-        state = ChatState.success(
+        state = AsyncData(Chat(
           messages: _messages,
           userName: _userName,
-        );
+        ));
       },
     );
   }
@@ -56,10 +61,10 @@ class ChatNotifier extends StateNotifier<ChatState> {
   void userNameChanged() {
     _userName = userNameController.text;
 
-    state = ChatState.success(
+    state = state = AsyncData(Chat(
       messages: _messages,
       userName: _userName,
-    );
+    ));
   }
 
   void messagePosted() {

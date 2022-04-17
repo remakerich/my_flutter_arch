@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:graphql_test_new/providers/providers.dart';
+import 'package:graphql_test_new/providers/chat_provider.dart';
 
 class ChatPage extends StatelessWidget {
   const ChatPage({Key? key}) : super(key: key);
@@ -36,15 +36,17 @@ class _MessagesList extends ConsumerWidget {
     final state = ref.watch(chatNotifierProvider);
 
     return state.maybeMap(
-      success: (state) {
+      data: (state) {
+        final chat = state.value;
+
         return ListView.builder(
           physics: const BouncingScrollPhysics(),
           padding: EdgeInsets.zero,
           reverse: true,
-          itemCount: state.messages.length,
+          itemCount: chat.messages.length,
           itemBuilder: (context, index) {
-            final message = state.messages[index];
-            final isMe = state.userName == message.user;
+            final message = chat.messages[index];
+            final isMe = chat.userName == message.user;
 
             return Padding(
               padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),

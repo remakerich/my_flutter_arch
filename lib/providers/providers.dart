@@ -4,5 +4,5 @@ import 'package:graphql_test_new/providers/chat/chat_notifier.dart';
 import 'package:graphql_test_new/providers/chat/chat_state.dart';
 
 final chatNotifierProvider = StateNotifierProvider<ChatNotifier, ChatState>(
-  (ref) => getIt<ChatNotifier>()..started(),
+  (ref) => getIt<ChatNotifier>()..started(ref),
 );

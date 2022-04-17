@@ -19,6 +19,7 @@ class ChatNotifier extends StateNotifier<ChatState> {
   final userNameController = TextEditingController();
   final messageController = TextEditingController();
   final ChatService _chatService;
+  late final Ref _ref;
 
   @override
   Future<void> dispose() async {
@@ -28,7 +29,8 @@ class ChatNotifier extends StateNotifier<ChatState> {
     return super.dispose();
   }
 
-  void started() {
+  void started(Ref ref) {
+    _ref = ref;
     state = const ChatState.loading();
 
     _chatSubscription = _chatService.subscribeToChat().listen(

@@ -1,72 +1,51 @@
-import 'dart:io';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:injectable/injectable.dart';
+import 'package:graphql_test_new/core/models/either.dart';
+import 'package:graphql_test_new/core/models/failure.dart';
+import 'package:graphql_test_new/repositories/chat_repository.dart';
 
-@LazySingleton()
+final chatService = Provider<ChatService>(
+  (ref) {
+    return ChatService(
+      ref.watch(chatRepository),
+    );
+  },
+);
+
 class ChatService {
-  const ChatService();
-
-  static get _url => Platform.isAndroid ? 'ws://10.0.2.2:4000' : 'ws://localhost:4000';
-
-  static final _client = GraphQLClient(
-    link: WebSocketLink(_url),
-    cache: GraphQLCache(),
+  const ChatService(
+    this._chatRepository,
   );
 
-  Future<QueryResult> getAllMessages() async {
-    return await _client.query(
-      QueryOptions(
-        document: gql(GqlDocs.getAllMessages),
-      ),
-    );
+  final ChatRepository _chatRepository;
+
+  Future<Either<Failure, QueryResult>> getAllMessages() async {
+    try {
+      final result = await _chatRepository.getAllMessages();
+      return Right(result);
+    } catch (exception) {
+      return Left(Failure.fromException(exception));
+    }
   }
 
-  Future<QueryResult> postMessage(
+  Future<Either<Failure, void>> postMessage(
     String userName,
     String message,
   ) async {
-    return await _client.mutate(
-      MutationOptions(
-        document: gql(GqlDocs.postMessage(userName, message)),
-      ),
-    );
+    try {
+      await _chatRepository.postMessage(userName, message);
+      return const Right(null);
+    } catch (exception) {
+      return Left(Failure.fromException(exception));
+    }
   }
 
-  Stream<QueryResult> subscribeToChat() {
-    return _client.subscribe(
-      SubscriptionOptions(
-        document: gql(
-          GqlDocs.subscribe,
-        ),
-      ),
-    );
+  Either<Failure, Stream<QueryResult<Object?>>> subscribeToChat() {
+    try {
+      final result = _chatRepository.subscribeToChat();
+      return Right(result);
+    } catch (exception) {
+      return Left(Failure.fromException(exception));
+    }
   }
-}
-
-class GqlDocs {
-  static const getAllMessages = '''
-    query { 
-      messages { 
-        id 
-        content 
-        user 
-      } 
-    }
-  ''';
-
-  static String postMessage(String userName, String message) => '''
-    mutation {
-      postMessage(user: "$userName", content: "$message")
-    }
-  ''';
-
-  static const subscribe = '''
-    subscription { 
-      messages { 
-        id 
-        content 
-        user 
-      } 
-    }
-  ''';
 }

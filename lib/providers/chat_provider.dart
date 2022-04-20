@@ -1,74 +1,77 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:graphql_test_new/injection/injection.dart';
-import 'package:graphql_test_new/models/chat.dart';
 import 'package:graphql_test_new/models/message.dart';
+import 'package:graphql_test_new/providers/message_provider.dart';
+import 'package:graphql_test_new/providers/user_name_provider.dart';
 import 'package:graphql_test_new/services/chat_service.dart';
-import 'package:injectable/injectable.dart';
 
-final chatProvider = StateNotifierProvider.autoDispose<ChatNotifier, AsyncValue<Chat>>(
-  (ref) => getIt<ChatNotifier>()..started(ref),
+final chatProvider =
+    StateNotifierProvider.autoDispose<ChatNotifier, AsyncValue<List<Message>>>(
+  (ref) {
+    return ChatNotifier(
+      ref.watch(chatService),
+      ref,
+    );
+  },
 );
 
-@LazySingleton()
-class ChatNotifier extends StateNotifier<AsyncValue<Chat>> {
+class ChatNotifier extends StateNotifier<AsyncValue<List<Message>>> {
   ChatNotifier(
     this._chatService,
-  ) : super(const AsyncLoading());
+    this._ref,
+  ) : super(const AsyncLoading()) {
+    started();
+  }
 
   StreamSubscription? _chatSubscription;
-  String _userName = '';
   List<Message> _messages = [];
-  final userNameController = TextEditingController();
-  final messageController = TextEditingController();
   final ChatService _chatService;
+  final Ref _ref;
 
   @override
   Future<void> dispose() async {
     await _chatSubscription?.cancel();
-    userNameController.dispose();
-    messageController.dispose();
     return super.dispose();
   }
 
-  void started(Ref ref) {
+  void started() {
     state = const AsyncLoading();
 
-    _chatSubscription = _chatService.subscribeToChat().listen(
-      (event) {
-        final messages = <Message>[];
-        event.data!['messages'].forEach(
-          (message) => messages.add(
-            Message.fromJson(message),
-          ),
+    final result = _chatService.subscribeToChat();
+
+    result.when(
+      left: (failure) => AsyncError(failure),
+      right: (subscription) {
+        _chatSubscription = subscription.listen(
+          (event) {
+            final messages = <Message>[];
+            event.data!['messages'].forEach(
+              (message) => messages.add(
+                Message.fromJson(message),
+              ),
+            );
+
+            _messages = messages.reversed.toList();
+
+            state = AsyncData(_messages);
+          },
         );
-
-        _messages = messages.reversed.toList();
-
-        state = AsyncData(Chat(
-          messages: _messages,
-          userName: _userName,
-        ));
       },
     );
   }
 
-  void userNameChanged() {
-    _userName = userNameController.text;
+  void messagePosted() async {
+    final message = _ref.read(messageProvider);
+    final userName = _ref.read(userNameProvider);
+    final result = await _chatService.postMessage(userName, message);
 
-    state = state = AsyncData(Chat(
-      messages: _messages,
-      userName: _userName,
-    ));
-  }
-
-  void messagePosted() {
-    _chatService.postMessage(
-      userNameController.text,
-      messageController.text,
+    result.when(
+      left: (failure) => AsyncError(failure),
+      right: (_) {
+        _ref.read(messageProvider.notifier).clear();
+        AsyncData(_messages);
+      },
     );
-    messageController.clear();
   }
 }

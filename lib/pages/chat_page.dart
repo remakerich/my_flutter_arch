@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:graphql_test_new/providers/chat_provider.dart';
+import 'package:graphql_test_new/providers/message_provider.dart';
+import 'package:graphql_test_new/providers/user_name_provider.dart';
 
 class ChatPage extends StatelessWidget {
   const ChatPage({Key? key}) : super(key: key);
@@ -34,24 +36,24 @@ class _MessagesList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(chatProvider);
+    final userName = ref.watch(userNameProvider);
 
-    return state.maybeMap(
-      data: (state) {
-        final chat = state.value;
-
+    return state.maybeWhen(
+      data: (messages) {
         return ListView.builder(
           physics: const BouncingScrollPhysics(),
           padding: EdgeInsets.zero,
           reverse: true,
-          itemCount: chat.messages.length,
+          itemCount: messages.length,
           itemBuilder: (context, index) {
-            final message = chat.messages[index];
-            final isMe = chat.userName == message.user;
+            final message = messages[index];
+            final isMe = userName == message.user;
 
             return Padding(
               padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
               child: Row(
-                mainAxisAlignment: isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
+                mainAxisAlignment:
+                    isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
                 children: [
                   if (!isMe) ...{
                     Text(
@@ -95,7 +97,7 @@ class _InputArea extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final chatNotifier = ref.watch(chatProvider.notifier);
+    final messageNotifier = ref.watch(messageProvider.notifier);
 
     return Container(
       color: Colors.blueGrey,
@@ -106,14 +108,16 @@ class _InputArea extends ConsumerWidget {
               flex: 1,
               child: _TextField(
                 hint: 'Username',
-                controller: chatNotifier.userNameController,
+                onChanged: (userName) {
+                  ref.read(userNameProvider.notifier).state = userName;
+                },
               ),
             ),
             Expanded(
               flex: 2,
               child: _TextField(
                 hint: 'Message',
-                controller: chatNotifier.messageController,
+                controller: messageNotifier.messageController,
               ),
             ),
             Container(
@@ -138,11 +142,13 @@ class _TextField extends ConsumerWidget {
   const _TextField({
     Key? key,
     required this.hint,
-    required this.controller,
+    this.onChanged,
+    this.controller,
   }) : super(key: key);
 
   final String hint;
-  final TextEditingController controller;
+  final Function(String)? onChanged;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -158,14 +164,9 @@ class _TextField extends ConsumerWidget {
         ),
       ),
       child: TextField(
-        onChanged: (value) {
-          if (hint != 'Username') {
-            return;
-          }
-          ref.read(chatProvider.notifier).userNameChanged();
-        },
         cursorColor: Colors.black,
         cursorWidth: 1,
+        onChanged: onChanged,
         controller: controller,
         textAlignVertical: TextAlignVertical.center,
         obscureText: false,

@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:graphql_test_new/core/models/either.dart';
 import 'package:graphql_test_new/core/models/failure.dart';
-import 'package:graphql_test_new/repositories/chat_repository.dart';
+import 'package:graphql_test_new/modules/chat/repositories/chat_repository.dart';
 
 final chatService = Provider<ChatService>(
   (ref) {

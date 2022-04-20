@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:graphql_test_new/providers/chat_provider.dart';
-import 'package:graphql_test_new/providers/message_provider.dart';
-import 'package:graphql_test_new/providers/user_name_provider.dart';
+import 'package:graphql_test_new/modules/chat/providers/chat_provider.dart';
+import 'package:graphql_test_new/modules/chat/providers/message_provider.dart';
+import 'package:graphql_test_new/modules/chat/providers/user_name_provider.dart';
 
 class ChatPage extends StatelessWidget {
   const ChatPage({Key? key}) : super(key: key);
@@ -38,7 +38,7 @@ class _MessagesList extends ConsumerWidget {
     final state = ref.watch(chatProvider);
     final userName = ref.watch(userNameProvider);
 
-    return state.maybeWhen(
+    return state.when(
       data: (messages) {
         return ListView.builder(
           physics: const BouncingScrollPhysics(),
@@ -85,8 +85,11 @@ class _MessagesList extends ConsumerWidget {
           },
         );
       },
-      orElse: () => const Center(
+      loading: () => const Center(
         child: Text('Loading chat'),
+      ),
+      error: (error, stackTrace) => Center(
+        child: Text('$error $stackTrace'),
       ),
     );
   }

@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:graphql_test_new/core/network/gql_client_provider.dart';
-import 'package:graphql_test_new/repositories/queries.dart';
+import 'package:graphql_test_new/modules/chat/repositories/queries.dart';
 
 final chatRepository = Provider<ChatRepository>(
   (ref) {

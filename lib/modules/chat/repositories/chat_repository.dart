@@ -16,34 +16,22 @@ class ChatRepository {
     this._client,
   );
 
-  final GraphQLClient _client;
+  final GqlClient _client;
 
   Future<QueryResult> getAllMessages() async {
-    return await _client.query(
-      QueryOptions(
-        document: gql(GqlQueries.getAllMessages),
-      ),
-    );
+    return await _client.query(GqlQueries.getAllMessages);
   }
 
-  Future<void> postMessage(
+  Future<QueryResult> postMessage(
     String userName,
     String message,
   ) async {
-    await _client.mutate(
-      MutationOptions(
-        document: gql(GqlQueries.postMessage(userName, message)),
-      ),
+    return await _client.mutate(
+      GqlQueries.postMessage(userName, message),
     );
   }
 
   Stream<QueryResult> subscribeToChat() {
-    return _client.subscribe(
-      SubscriptionOptions(
-        document: gql(
-          GqlQueries.subscribe,
-        ),
-      ),
-    );
+    return _client.subscribe(GqlQueries.subscribe);
   }
 }

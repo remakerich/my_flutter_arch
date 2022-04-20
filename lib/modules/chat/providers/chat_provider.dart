@@ -45,6 +45,7 @@ class ChatNotifier extends StateNotifier<AsyncValue<List<Message>>> {
       right: (subscription) {
         _chatSubscription = subscription.listen(
           (event) {
+            print('event $event');
             final messages = <Message>[];
             event.data!['messages'].forEach(
               (message) => messages.add(
@@ -67,11 +68,8 @@ class ChatNotifier extends StateNotifier<AsyncValue<List<Message>>> {
     final result = await _chatService.postMessage(userName, message);
 
     result.when(
-      left: (failure) => AsyncError(failure),
-      right: (_) {
-        _ref.read(messageProvider.notifier).clear();
-        AsyncData(_messages);
-      },
+      left: (failure) => state = AsyncError(failure),
+      right: (_) => _ref.read(messageProvider.notifier).clear(),
     );
   }
 }

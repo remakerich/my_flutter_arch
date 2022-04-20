@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:graphql_test_new/modules/chat/models/message.dart';
 import 'package:graphql_test_new/modules/chat/providers/chat_provider.dart';
 import 'package:graphql_test_new/modules/chat/providers/message_provider.dart';
 import 'package:graphql_test_new/modules/chat/providers/user_name_provider.dart';
@@ -49,47 +51,69 @@ class _MessagesList extends ConsumerWidget {
             final message = messages[index];
             final isMe = userName == message.user;
 
-            return Padding(
-              padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
-              child: Row(
-                mainAxisAlignment:
-                    isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
-                children: [
-                  if (!isMe) ...{
-                    Text(
-                      '${message.user}:',
-                    ),
-                    const SizedBox(width: 10),
-                  },
-                  Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: isMe ? Colors.green : Colors.grey,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Row(
-                      children: [
-                        Text(
-                          message.content,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+            return _Message(
+              isMe: isMe,
+              message: message,
             );
           },
         );
       },
       loading: () => const Center(
-        child: Text('Loading chat'),
+        child: CupertinoActivityIndicator(),
       ),
       error: (error, stackTrace) => Center(
-        child: Text('$error $stackTrace'),
+        child: Text(
+          '$error $stackTrace',
+          textAlign: TextAlign.center,
+        ),
+      ),
+    );
+  }
+}
+
+class _Message extends StatelessWidget {
+  const _Message({
+    Key? key,
+    required this.isMe,
+    required this.message,
+  }) : super(key: key);
+
+  final bool isMe;
+  final Message message;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+      child: Row(
+        mainAxisAlignment:
+            isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
+        children: [
+          if (!isMe) ...{
+            Text(
+              '${message.user}:',
+            ),
+            const SizedBox(width: 10),
+          },
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: isMe ? Colors.green : Colors.grey,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Row(
+              children: [
+                Text(
+                  message.content,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -165,7 +165,7 @@ class _InputArea extends ConsumerWidget {
   }
 }
 
-class _TextField extends ConsumerWidget {
+class _TextField extends StatelessWidget {
   const _TextField({
     Key? key,
     required this.hint,
@@ -178,7 +178,7 @@ class _TextField extends ConsumerWidget {
   final TextEditingController? controller;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Container(
       height: 40,
       alignment: Alignment.center,

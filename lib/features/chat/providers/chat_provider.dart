@@ -42,7 +42,7 @@ class ChatNotifier extends StateNotifier<AsyncValue<List<Message>>> {
     final result = _chatService.subscribeToChat();
 
     result.when(
-      left: (failure) => AsyncError(failure),
+      left: (failure) => state = AsyncError(failure),
       right: (subscription) {
         _chatSubscription = subscription.listen(
           (event) {

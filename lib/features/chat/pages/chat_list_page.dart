@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:graphql_test_new/core/utils/ui.dart';
 import 'package:graphql_test_new/features/chat/pages/chat_page.dart';
 
 class ChatListPage extends ConsumerWidget {
@@ -9,7 +10,7 @@ class ChatListPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blueGrey,
+        backgroundColor: AppColors.accent,
         elevation: 0,
         centerTitle: true,
         title: const Text(

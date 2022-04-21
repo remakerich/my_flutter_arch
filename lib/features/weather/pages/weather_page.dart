@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:graphql_test_new/core/utils/ui.dart';
 import 'package:graphql_test_new/core/widgets/text_input_field.dart';
 import 'package:graphql_test_new/features/weather/models/city_weather.dart';
 import 'package:graphql_test_new/features/weather/providers/weather_provider.dart';
@@ -14,7 +16,7 @@ class WeatherPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blueGrey,
+        backgroundColor: AppColors.accent,
         elevation: 0,
         centerTitle: true,
         title: const Text(
@@ -73,13 +75,12 @@ class _WeatherInfo extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Icon(
+        SvgPicture.asset(
           weather.weather.when(
-            rain: () => CupertinoIcons.cloud_rain,
-            clouds: () => CupertinoIcons.cloud_sun,
-            clear: () => CupertinoIcons.sun_min,
+            rain: () => AppAssets.rain,
+            clouds: () => AppAssets.clouds,
+            clear: () => AppAssets.sun,
           ),
-          size: 100,
         ),
         const SizedBox(height: 10),
         Text(

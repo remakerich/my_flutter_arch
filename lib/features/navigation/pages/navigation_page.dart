@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:graphql_test_new/core/utils/ui.dart';
 import 'package:graphql_test_new/features/chat/pages/chat_list_page.dart';
 import 'package:graphql_test_new/features/navigation/providers/bottom_navigation_provider.dart';
 import 'package:graphql_test_new/features/weather/pages/weather_page.dart';
@@ -15,7 +16,7 @@ class NavigationPage extends ConsumerWidget {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.blueGrey,
+      backgroundColor: AppColors.accent,
       body: Column(
         children: [
           Expanded(

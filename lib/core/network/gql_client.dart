@@ -1,13 +1,8 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:graphql_test_new/core/network/network_config.dart';
+import 'package:injectable/injectable.dart';
 
-final gqlClientProvider = Provider(
-  (ref) {
-    return GqlClient();
-  },
-);
-
+@LazySingleton()
 class GqlClient {
   static final client = GraphQLClient(
     link: WebSocketLink(

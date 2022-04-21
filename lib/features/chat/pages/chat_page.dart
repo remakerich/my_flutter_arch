@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:graphql_test_new/modules/chat/models/message.dart';
-import 'package:graphql_test_new/modules/chat/providers/chat_provider.dart';
-import 'package:graphql_test_new/modules/chat/providers/message_provider.dart';
-import 'package:graphql_test_new/modules/chat/providers/user_name_provider.dart';
+import 'package:graphql_test_new/features/chat/models/message.dart';
+import 'package:graphql_test_new/features/chat/providers/chat_provider.dart';
+import 'package:graphql_test_new/features/chat/providers/message_provider.dart';
+import 'package:graphql_test_new/features/chat/providers/user_name_provider.dart';
 
 class ChatPage extends StatelessWidget {
   const ChatPage({Key? key}) : super(key: key);

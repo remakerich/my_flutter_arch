@@ -1,16 +1,9 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:graphql_test_new/core/network/gql_client_provider.dart';
-import 'package:graphql_test_new/modules/chat/repositories/queries.dart';
+import 'package:graphql_test_new/core/network/gql_client.dart';
+import 'package:graphql_test_new/features/chat/repositories/queries.dart';
+import 'package:injectable/injectable.dart';
 
-final chatRepository = Provider<ChatRepository>(
-  (ref) {
-    return ChatRepository(
-      ref.watch(gqlClientProvider),
-    );
-  },
-);
-
+@LazySingleton()
 class ChatRepository {
   const ChatRepository(
     this._client,

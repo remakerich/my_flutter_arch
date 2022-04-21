@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:graphql_test_new/modules/chat/pages/chat_page.dart';
+import 'package:graphql_test_new/core/injection/injection.dart';
+import 'package:graphql_test_new/features/chat/pages/chat_page.dart';
 
 void main() async {
+  await initializeDependencies();
+
   runApp(
     const ProviderScope(
       child: MyApp(),

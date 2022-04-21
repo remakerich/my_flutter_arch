@@ -2,7 +2,7 @@
 
 <img src="https://user-images.githubusercontent.com/85007290/164529980-32a7c11a-6dcb-4f3b-8e60-4ae9d6c734a6.png" height="400">
 
-Чат в реальном времени
+Чат
 
 1. GraphQL сервер чата на Node.js (запускается локально).
 2. Клиент на Flutter с использованием менеджера состояний Riverpod.

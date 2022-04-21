@@ -17,7 +17,7 @@ class ChatPage extends StatelessWidget {
         elevation: 0,
         centerTitle: true,
         title: const Text(
-          'GraphQL chat + Riverpod',
+          'GraphQL + WebSocket',
         ),
       ),
       body: Column(
@@ -58,8 +58,18 @@ class _MessagesList extends ConsumerWidget {
           },
         );
       },
-      loading: () => const Center(
-        child: CupertinoActivityIndicator(),
+      loading: () => Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            CupertinoActivityIndicator(),
+            SizedBox(height: 10),
+            Text(
+              'Please make sure\nchat server is running.',
+              textAlign: TextAlign.center,
+            )
+          ],
+        ),
       ),
       error: (error, stackTrace) => Center(
         child: Text(
@@ -126,8 +136,7 @@ class _InputArea extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final messageNotifier = ref.watch(messageProvider.notifier);
 
-    return Container(
-      color: Colors.blueGrey,
+    return SafeArea(
       child: Row(
         children: [
           Expanded(

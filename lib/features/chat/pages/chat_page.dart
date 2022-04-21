@@ -128,38 +128,36 @@ class _InputArea extends ConsumerWidget {
 
     return Container(
       color: Colors.blueGrey,
-      child: SafeArea(
-        child: Row(
-          children: [
-            Expanded(
-              flex: 1,
-              child: _TextField(
-                hint: 'Username',
-                onChanged: (userName) {
-                  ref.read(userNameProvider.notifier).state = userName;
-                },
-              ),
+      child: Row(
+        children: [
+          Expanded(
+            flex: 1,
+            child: _TextField(
+              hint: 'Username',
+              onChanged: (userName) {
+                ref.read(userNameProvider.notifier).state = userName;
+              },
             ),
-            Expanded(
-              flex: 2,
-              child: _TextField(
-                hint: 'Message',
-                controller: messageNotifier.messageController,
-              ),
+          ),
+          Expanded(
+            flex: 2,
+            child: _TextField(
+              hint: 'Message',
+              controller: messageNotifier.messageController,
             ),
-            Container(
-              margin: const EdgeInsets.all(10),
-              child: GestureDetector(
-                child: const Icon(
-                  Icons.keyboard_double_arrow_up_rounded,
-                ),
-                onTap: () {
-                  ref.read(chatProvider.notifier).messagePosted();
-                },
+          ),
+          Container(
+            margin: const EdgeInsets.all(10),
+            child: GestureDetector(
+              child: const Icon(
+                Icons.keyboard_double_arrow_up_rounded,
               ),
-            )
-          ],
-        ),
+              onTap: () {
+                ref.read(chatProvider.notifier).messagePosted();
+              },
+            ),
+          )
+        ],
       ),
     );
   }

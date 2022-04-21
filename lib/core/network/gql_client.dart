@@ -6,7 +6,7 @@ import 'package:injectable/injectable.dart';
 class GqlClient {
   static final client = GraphQLClient(
     link: WebSocketLink(
-      NetworkConfig.serverWebSocket,
+      NetworkConfig.chatWebSocket,
     ),
     cache: GraphQLCache(),
   );

@@ -1,6 +1,6 @@
 ## features
 
-<img src="https://user-images.githubusercontent.com/85007290/164484000-321aefb6-8b77-4de9-a324-cbccc276f843.png" height="400">
+<img src="https://user-images.githubusercontent.com/85007290/164529980-32a7c11a-6dcb-4f3b-8e60-4ae9d6c734a6.png" height="400">
 
 Чат в реальном времени
 

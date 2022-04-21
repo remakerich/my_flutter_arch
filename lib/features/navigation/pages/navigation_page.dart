@@ -2,10 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:graphql_test_new/features/chat/pages/chats_list_tab.dart';
-import 'package:graphql_test_new/features/chat/providers/user_name_provider.dart';
-import 'package:graphql_test_new/features/checkout/pages/checkout_page.dart';
+import 'package:graphql_test_new/features/chat/pages/chat_list_page.dart';
 import 'package:graphql_test_new/features/navigation/providers/bottom_navigation_provider.dart';
+import 'package:graphql_test_new/features/weather/pages/weather_page.dart';
 
 class NavigationPage extends ConsumerWidget {
   const NavigationPage({Key? key}) : super(key: key);
@@ -13,9 +12,9 @@ class NavigationPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final bottomNavigationState = ref.watch(bottomNavigationProvider);
-    ref.watch(userNameProvider);
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.blueGrey,
       body: Column(
         children: [
@@ -23,8 +22,8 @@ class NavigationPage extends ConsumerWidget {
             child: IndexedStack(
               index: bottomNavigationState,
               children: const [
-                ChatsListTab(),
-                CheckoutPage(),
+                ChatListPage(),
+                WeatherPage(),
               ],
             ),
           ),

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:graphql_test_new/core/widgets/text_input_field.dart';
 import 'package:graphql_test_new/features/chat/models/message.dart';
 import 'package:graphql_test_new/features/chat/providers/chat_provider.dart';
 import 'package:graphql_test_new/features/chat/providers/message_provider.dart';
@@ -141,7 +142,7 @@ class _InputArea extends ConsumerWidget {
         children: [
           Expanded(
             flex: 1,
-            child: _TextField(
+            child: TextInputField(
               hint: 'Username',
               onChanged: (userName) {
                 ref.read(userNameProvider.notifier).state = userName;
@@ -150,7 +151,7 @@ class _InputArea extends ConsumerWidget {
           ),
           Expanded(
             flex: 2,
-            child: _TextField(
+            child: TextInputField(
               hint: 'Message',
               controller: messageNotifier.messageController,
             ),
@@ -167,53 +168,6 @@ class _InputArea extends ConsumerWidget {
             ),
           )
         ],
-      ),
-    );
-  }
-}
-
-class _TextField extends StatelessWidget {
-  const _TextField({
-    Key? key,
-    required this.hint,
-    this.onChanged,
-    this.controller,
-  }) : super(key: key);
-
-  final String hint;
-  final Function(String)? onChanged;
-  final TextEditingController? controller;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 40,
-      alignment: Alignment.center,
-      margin: const EdgeInsets.fromLTRB(10, 10, 0, 10),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: Colors.grey,
-        ),
-      ),
-      child: TextField(
-        cursorColor: Colors.black,
-        cursorWidth: 1,
-        onChanged: onChanged,
-        controller: controller,
-        textAlignVertical: TextAlignVertical.center,
-        obscureText: false,
-        decoration: InputDecoration(
-          hintText: hint,
-          border: InputBorder.none,
-          focusedBorder: InputBorder.none,
-          enabledBorder: InputBorder.none,
-          errorBorder: InputBorder.none,
-          disabledBorder: InputBorder.none,
-          contentPadding: const EdgeInsets.only(left: 10),
-          isCollapsed: true,
-        ),
       ),
     );
   }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:graphql_test_new/core/injection/injection.dart';
-import 'package:graphql_test_new/features/navitagation/pages/navigation_page.dart';
+import 'package:graphql_test_new/features/navigation/pages/navigation_page.dart';
+
 void main() async {
   await initializeDependencies();
 

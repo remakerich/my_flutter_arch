@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:graphql_test_new/features/chat/pages/chat_page.dart';
 
-class ChatsListTab extends ConsumerWidget {
-  const ChatsListTab({Key? key}) : super(key: key);
+class ChatListPage extends ConsumerWidget {
+  const ChatListPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

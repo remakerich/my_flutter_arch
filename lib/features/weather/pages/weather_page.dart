@@ -16,12 +16,7 @@ class WeatherPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.accent,
-        elevation: 0,
-        centerTitle: true,
-        title: const Text(
-          'REST (Dio + Retrofit)',
-        ),
+        title: const Text('REST (Dio + Retrofit)'),
       ),
       body: Column(
         children: [

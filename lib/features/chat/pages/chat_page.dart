@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:graphql_test_new/core/utils/ui.dart';
 import 'package:graphql_test_new/core/widgets/text_input_field.dart';
 import 'package:graphql_test_new/features/chat/models/message.dart';
 import 'package:graphql_test_new/features/chat/providers/chat_provider.dart';
@@ -15,12 +14,7 @@ class ChatPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.accent,
-        elevation: 0,
-        centerTitle: true,
-        title: const Text(
-          'GraphQL + WebSocket',
-        ),
+        title: const Text('GraphQL + WebSocket'),
       ),
       body: Column(
         children: const [

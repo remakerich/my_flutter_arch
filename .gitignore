@@ -57,3 +57,4 @@ lib/generated_plugin_registrant.dart
 **/*.g.dart
 **/*.freezed.dart
 **/*.config.dart
+**/*.gr.dart

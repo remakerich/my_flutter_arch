@@ -1,6 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:graphql_test_new/features/chat/pages/chat_page.dart';
+import 'package:graphql_test_new/core/router/router.dart';
 
 class ChatListPage extends ConsumerWidget {
   const ChatListPage({Key? key}) : super(key: key);
@@ -16,11 +17,7 @@ class ChatListPage extends ConsumerWidget {
         itemCount: 1,
         itemBuilder: (context, index) {
           return GestureDetector(
-            onTap: () => Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const ChatPage(),
-              ),
-            ),
+            onTap: () => context.router.push(const ChatRoute()),
             child: Container(
               color: Colors.transparent,
               alignment: Alignment.bottomCenter,

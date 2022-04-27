@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:graphql_test_new/core/injection/injection.dart';
+import 'package:graphql_test_new/core/router/router.dart';
 import 'package:graphql_test_new/core/utils/ui.dart';
-import 'package:graphql_test_new/features/navigation/pages/navigation_page.dart';
 
 void main() async {
   await initializeDependencies();
@@ -19,10 +19,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    final _appRouter = AppRouter();
+
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      home: const NavigationPage(),
       theme: AppTheme.theme,
+      routerDelegate: _appRouter.delegate(),
+      routeInformationParser: _appRouter.defaultRouteParser(),
     );
   }
 }

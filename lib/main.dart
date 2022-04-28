@@ -8,19 +8,18 @@ void main() async {
   await initializeDependencies();
 
   runApp(
-    const ProviderScope(
+    ProviderScope(
       child: MyApp(),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
+  final _appRouter = AppRouter();
 
   @override
   Widget build(BuildContext context) {
-    final _appRouter = AppRouter();
-
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.theme,

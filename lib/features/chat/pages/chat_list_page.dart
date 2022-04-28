@@ -11,6 +11,14 @@ class ChatListPage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('GraphQL + WebSocket'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              context.router.push(const FirstRoute());
+            },
+            child: const Text('1st'),
+          )
+        ],
       ),
       body: ListView.builder(
         physics: const BouncingScrollPhysics(),

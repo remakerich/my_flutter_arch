@@ -6,11 +6,13 @@ class AppInputField extends StatelessWidget {
     required this.hint,
     this.onChanged,
     this.controller,
+    this.isObscure = false,
   }) : super(key: key);
 
   final String hint;
   final Function(String)? onChanged;
   final TextEditingController? controller;
+  final bool isObscure;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,7 @@ class AppInputField extends StatelessWidget {
         onChanged: onChanged,
         controller: controller,
         textAlignVertical: TextAlignVertical.center,
-        obscureText: false,
+        obscureText: isObscure,
         decoration: InputDecoration(
           hintText: hint,
           border: InputBorder.none,

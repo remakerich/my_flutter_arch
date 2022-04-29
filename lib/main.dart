@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myarchapp/core/injection/injection.dart';
@@ -6,6 +7,8 @@ import 'package:myarchapp/core/utils/ui.dart';
 
 void main() async {
   await initializeDependencies();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
 
   runApp(
     ProviderScope(

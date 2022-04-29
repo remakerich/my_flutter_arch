@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:myarchapp/core/utils/ui.dart';
 
@@ -6,10 +7,12 @@ class AppButton extends StatelessWidget {
     Key? key,
     required this.label,
     this.onPressed,
+    this.loading = false,
   }) : super(key: key);
 
   final String label;
   final VoidCallback? onPressed;
+  final bool loading;
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +24,21 @@ class AppButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
         ),
       ),
-      onPressed:onPressed,
-      child: Text(label),
+      onPressed: loading ? null : onPressed,
+      child: loading
+          ? Stack(
+              alignment: Alignment.center,
+              children: [
+                Text(
+                  label,
+                  style: const TextStyle(
+                    color: Colors.transparent,
+                  ),
+                ),
+                const CupertinoActivityIndicator(),
+              ],
+            )
+          : Text(label),
     );
   }
 }

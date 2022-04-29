@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:graphql_test_new/core/utils/ui.dart';
-import 'package:graphql_test_new/core/widgets/text_input_field.dart';
-import 'package:graphql_test_new/features/weather/models/city_weather.dart';
-import 'package:graphql_test_new/features/weather/providers/weather_provider.dart';
+import 'package:myarchapp/core/utils/ui.dart';
+import 'package:myarchapp/core/widgets/text_input_field.dart';
+import 'package:myarchapp/features/weather/models/city_weather.dart';
+import 'package:myarchapp/features/weather/providers/weather_provider.dart';
 
 class WeatherPage extends ConsumerWidget {
   const WeatherPage({Key? key}) : super(key: key);
@@ -16,7 +16,7 @@ class WeatherPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('REST (Dio + Retrofit)'),
+        title: const Text('Weather: REST'),
       ),
       body: Column(
         children: [

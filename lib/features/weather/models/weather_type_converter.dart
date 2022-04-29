@@ -1,5 +1,5 @@
-import 'package:graphql_test_new/features/weather/models/weather_type.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:myarchapp/features/weather/models/weather_type.dart';
 
 class WeatherTypeConverter implements JsonConverter<WeatherType, String?> {
   const WeatherTypeConverter();

@@ -2,10 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:graphql_test_new/core/utils/ui.dart';
-import 'package:graphql_test_new/features/chat/pages/chat_list_page.dart';
-import 'package:graphql_test_new/features/navigation/providers/bottom_navigation_provider.dart';
-import 'package:graphql_test_new/features/weather/pages/weather_page.dart';
+import 'package:myarchapp/core/utils/ui.dart';
+import 'package:myarchapp/features/auth/pages/profile_page.dart';
+import 'package:myarchapp/features/chat/pages/chat_list_page.dart';
+import 'package:myarchapp/features/navigation/providers/bottom_navigation_provider.dart';
+import 'package:myarchapp/features/weather/pages/weather_page.dart';
 
 class NavigationPage extends ConsumerWidget {
   const NavigationPage({Key? key}) : super(key: key);
@@ -25,6 +26,7 @@ class NavigationPage extends ConsumerWidget {
               children: const [
                 ChatListPage(),
                 WeatherPage(),
+                ProfilePage(),
               ],
             ),
           ),
@@ -50,6 +52,14 @@ class NavigationPage extends ConsumerWidget {
                     },
                     isSelected: bottomNavigationState == 1,
                     icon: CupertinoIcons.cloud_drizzle,
+                  ),
+                  _BottomNavBarItem(
+                    onSelected: () {
+                      HapticFeedback.mediumImpact();
+                      ref.read(bottomNavigationProvider.notifier).state = 2;
+                    },
+                    isSelected: bottomNavigationState == 2,
+                    icon: CupertinoIcons.profile_circled,
                   ),
                   const SizedBox(width: 10),
                 ],

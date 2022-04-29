@@ -1,6 +1,6 @@
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:graphql_test_new/core/network/network_config.dart';
 import 'package:injectable/injectable.dart';
+import 'package:myarchapp/core/network/network_config.dart';
 
 @LazySingleton()
 class GqlClient {

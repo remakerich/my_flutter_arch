@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:graphql_test_new/core/injection/injection.dart';
-import 'package:graphql_test_new/features/weather/models/city_weather.dart';
-import 'package:graphql_test_new/features/weather/services/weather_service.dart';
+import 'package:myarchapp/core/injection/injection.dart';
+import 'package:myarchapp/features/weather/models/city_weather.dart';
+import 'package:myarchapp/features/weather/services/weather_service.dart';
 
 final weatherProvider =
     StateNotifierProvider.autoDispose<WeatherNotifier, AsyncValue<CityWeather>>(

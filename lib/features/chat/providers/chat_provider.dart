@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:graphql_test_new/core/injection/injection.dart';
-import 'package:graphql_test_new/features/chat/models/message.dart';
-import 'package:graphql_test_new/features/chat/providers/message_provider.dart';
-import 'package:graphql_test_new/features/chat/providers/user_name_provider.dart';
-import 'package:graphql_test_new/features/chat/services/chat_service.dart';
+import 'package:myarchapp/core/injection/injection.dart';
+import 'package:myarchapp/features/chat/models/message.dart';
+import 'package:myarchapp/features/chat/providers/message_provider.dart';
+import 'package:myarchapp/features/chat/providers/user_name_provider.dart';
+import 'package:myarchapp/features/chat/services/chat_service.dart';
 
 final chatProvider =
     StateNotifierProvider.autoDispose<ChatNotifier, AsyncValue<List<Message>>>(

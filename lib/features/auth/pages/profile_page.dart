@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class SecondPage extends StatelessWidget {
-  const SecondPage({Key? key}) : super(key: key);
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('2nd page'),
+        title: const Text('Profile: Firebase'),
       ),
     );
   }

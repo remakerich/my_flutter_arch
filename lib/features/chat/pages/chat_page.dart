@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:graphql_test_new/core/widgets/text_input_field.dart';
-import 'package:graphql_test_new/features/chat/models/message.dart';
-import 'package:graphql_test_new/features/chat/providers/chat_provider.dart';
-import 'package:graphql_test_new/features/chat/providers/message_provider.dart';
-import 'package:graphql_test_new/features/chat/providers/user_name_provider.dart';
+import 'package:myarchapp/core/widgets/text_input_field.dart';
+import 'package:myarchapp/features/chat/models/message.dart';
+import 'package:myarchapp/features/chat/providers/chat_provider.dart';
+import 'package:myarchapp/features/chat/providers/message_provider.dart';
+import 'package:myarchapp/features/chat/providers/user_name_provider.dart';
 
 class ChatPage extends StatelessWidget {
   const ChatPage({Key? key}) : super(key: key);
@@ -61,7 +61,9 @@ class _MessagesList extends ConsumerWidget {
             CupertinoActivityIndicator(),
             SizedBox(height: 10),
             Text(
-              'Please make sure\nchat server is running.',
+              'Please make sure\nchat server is running.\n\n'
+              'Please note: This feature can only\n'
+              'be tested on emulator',
               textAlign: TextAlign.center,
             )
           ],

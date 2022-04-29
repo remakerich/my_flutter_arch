@@ -1,7 +1,7 @@
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:graphql_test_new/core/network/gql_client.dart';
-import 'package:graphql_test_new/features/chat/repositories/queries.dart';
 import 'package:injectable/injectable.dart';
+import 'package:myarchapp/core/network/gql_client.dart';
+import 'package:myarchapp/features/chat/repositories/queries.dart';
 
 @LazySingleton()
 class ChatRepository {

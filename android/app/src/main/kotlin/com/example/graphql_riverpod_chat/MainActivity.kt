@@ -1,4 +1,4 @@
-package com.example.graphql_riverpod_chat
+package com.example.myarchapp
 
 import io.flutter.embedding.android.FlutterActivity
 

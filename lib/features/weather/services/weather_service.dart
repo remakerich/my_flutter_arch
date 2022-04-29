@@ -1,9 +1,9 @@
-import 'package:graphql_test_new/core/exceptions/either.dart';
-import 'package:graphql_test_new/core/exceptions/exception_handler.dart';
-import 'package:graphql_test_new/core/exceptions/failure.dart';
-import 'package:graphql_test_new/features/weather/models/city_weather.dart';
-import 'package:graphql_test_new/features/weather/repositories/weather_repository.dart';
 import 'package:injectable/injectable.dart';
+import 'package:myarchapp/core/exceptions/either.dart';
+import 'package:myarchapp/core/exceptions/exception_handler.dart';
+import 'package:myarchapp/core/exceptions/failure.dart';
+import 'package:myarchapp/features/weather/models/city_weather.dart';
+import 'package:myarchapp/features/weather/repositories/weather_repository.dart';
 
 @lazySingleton
 class WeatherService {

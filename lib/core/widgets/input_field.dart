@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class TextInputField extends StatelessWidget {
-  const TextInputField({
+class AppInputField extends StatelessWidget {
+  const AppInputField({
     Key? key,
     required this.hint,
     this.onChanged,
@@ -17,7 +17,7 @@ class TextInputField extends StatelessWidget {
     return Container(
       height: 40,
       alignment: Alignment.center,
-      margin: const EdgeInsets.fromLTRB(10, 10, 0, 10),
+      margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),

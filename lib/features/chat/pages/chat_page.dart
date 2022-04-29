@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:myarchapp/core/widgets/text_input_field.dart';
+import 'package:myarchapp/core/widgets/input_field.dart';
 import 'package:myarchapp/features/chat/models/message.dart';
 import 'package:myarchapp/features/chat/providers/chat_provider.dart';
 import 'package:myarchapp/features/chat/providers/message_provider.dart';
@@ -137,18 +137,20 @@ class _InputArea extends ConsumerWidget {
     return SafeArea(
       child: Row(
         children: [
+          const SizedBox(width: 10),
           Expanded(
             flex: 1,
-            child: TextInputField(
+            child: AppInputField(
               hint: 'Username',
               onChanged: (userName) {
                 ref.read(userNameProvider.notifier).state = userName;
               },
             ),
           ),
+          const SizedBox(width: 10),
           Expanded(
             flex: 2,
-            child: TextInputField(
+            child: AppInputField(
               hint: 'Message',
               controller: messageNotifier.messageController,
             ),

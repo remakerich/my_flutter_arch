@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:myarchapp/core/utils/ui.dart';
-import 'package:myarchapp/core/widgets/text_input_field.dart';
+import 'package:myarchapp/core/widgets/input_field.dart';
 import 'package:myarchapp/features/weather/models/city_weather.dart';
 import 'package:myarchapp/features/weather/providers/weather_provider.dart';
 
@@ -20,18 +20,14 @@ class WeatherPage extends ConsumerWidget {
       ),
       body: Column(
         children: [
-          Row(
-            children: [
-              Expanded(
-                child: TextInputField(
-                  hint: 'Enter city',
-                  onChanged: (city) {
-                    ref.read(weatherProvider.notifier).started(city);
-                  },
-                ),
-              ),
-              const SizedBox(width: 10),
-            ],
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: AppInputField(
+              hint: 'Enter city',
+              onChanged: (city) {
+                ref.read(weatherProvider.notifier).started(city);
+              },
+            ),
           ),
           Expanded(
             child: Center(

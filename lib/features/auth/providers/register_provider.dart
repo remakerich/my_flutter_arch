@@ -44,13 +44,11 @@ class RegisterNotifier extends StateNotifier<AsyncValue<bool>> {
     result.when(
       left: (failure) => state = AsyncError(failure),
       right: (_) async {
+        context.router.pop();
+        state = const AsyncData(true);
         nameController.clear();
         emailController.clear();
         passwordController.clear();
-        state = const AsyncData(true);
-        context.router.pop();
-        await Future.delayed(const Duration(seconds: 5));
-        state = const AsyncData(false);
       },
     );
   }

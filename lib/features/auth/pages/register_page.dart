@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myarchapp/core/widgets/app_button.dart';
 import 'package:myarchapp/core/widgets/input_field.dart';
 import 'package:myarchapp/features/auth/providers/register_provider.dart';
+import 'package:myarchapp/generated/l10n.dart';
 
 class RegisterPage extends ConsumerWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -13,7 +14,7 @@ class RegisterPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Register'),
+        title: Text(S.current.register),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),

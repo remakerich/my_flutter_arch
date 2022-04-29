@@ -7,6 +7,7 @@ import 'package:myarchapp/core/widgets/app_text_button.dart';
 import 'package:myarchapp/core/widgets/input_field.dart';
 import 'package:myarchapp/features/auth/providers/login_provider.dart';
 import 'package:myarchapp/features/auth/providers/register_provider.dart';
+import 'package:myarchapp/generated/l10n.dart';
 
 class LoginPage extends ConsumerWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -17,7 +18,7 @@ class LoginPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
+        title: Text(S.current.login),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -35,7 +36,7 @@ class LoginPage extends ConsumerWidget {
               isObscure: true,
             ),
             AppButton(
-              label: 'Sign In',
+              label: S.current.login,
               loading: loginState is AsyncLoading,
               onPressed: () {
                 ref.read(loginProvider.notifier).signIn(context);
@@ -47,7 +48,7 @@ class LoginPage extends ConsumerWidget {
                 children: [
                   const Text('No account yet?'),
                   AppTextButton(
-                    label: 'Register',
+                    label: S.current.register,
                     onPressed: () => context.router.push(const RegisterRoute()),
                   ),
                 ],

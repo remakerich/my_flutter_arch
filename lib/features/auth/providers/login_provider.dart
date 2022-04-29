@@ -42,8 +42,6 @@ class LoginNotifier extends StateNotifier<AsyncValue<bool>> {
     result.when(
       left: (failure) async {
         state = AsyncError(failure);
-        await Future.delayed(const Duration(seconds: 5));
-        state = const AsyncData(false);
       },
       right: (_) {
         context.router.replace(const NavigationRoute());

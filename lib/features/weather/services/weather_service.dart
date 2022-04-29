@@ -1,6 +1,5 @@
 import 'package:injectable/injectable.dart';
 import 'package:myarchapp/core/exceptions/either.dart';
-import 'package:myarchapp/core/exceptions/exception_handler.dart';
 import 'package:myarchapp/core/exceptions/failure.dart';
 import 'package:myarchapp/features/weather/models/city_weather.dart';
 import 'package:myarchapp/features/weather/repositories/weather_repository.dart';
@@ -14,8 +13,11 @@ class WeatherService {
   final WeatherRepository _weatherRepository;
 
   Future<Either<Failure, CityWeather>> getCityWeather(String city) async {
-    return await catchException(
-      () => _weatherRepository.getCityWeather(city),
-    );
+    try {
+      final result = await _weatherRepository.getCityWeather(city);
+      return Right(result);
+    } catch (exception) {
+      return Left(Failure.fromException(exception));
+    }
   }
 }

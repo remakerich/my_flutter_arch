@@ -1,7 +1,6 @@
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:injectable/injectable.dart';
 import 'package:myarchapp/core/exceptions/either.dart';
-import 'package:myarchapp/core/exceptions/exception_handler.dart';
 import 'package:myarchapp/core/exceptions/failure.dart';
 import 'package:myarchapp/features/chat/repositories/chat_repository.dart';
 
@@ -14,24 +13,32 @@ class ChatService {
   final ChatRepository _chatRepository;
 
   Future<Either<Failure, QueryResult>> getAllMessages() async {
-    return await catchException(
-      () => _chatRepository.getAllMessages(),
-    );
+    try {
+      final result = await _chatRepository.getAllMessages();
+      return Right(result);
+    } catch (exception) {
+      return Left(Failure.fromException(exception));
+    }
   }
 
   Future<Either<Failure, void>> postMessage(
     String userName,
     String message,
   ) async {
-    return await catchException(
-      () => _chatRepository.postMessage(userName, message),
-    );
+    try {
+      await _chatRepository.postMessage(userName, message);
+      return const Right(null);
+    } catch (exception) {
+      return Left(Failure.fromException(exception));
+    }
   }
 
-  Future<Either<Failure, Stream<QueryResult<Object?>>>>
-      subscribeToChat() async {
-    return await catchException(
-      () async => _chatRepository.subscribeToChat(),
-    );
+  Either<Failure, Stream<QueryResult<Object?>>> subscribeToChat() {
+    try {
+      final result = _chatRepository.subscribeToChat();
+      return Right(result);
+    } catch (exception) {
+      return Left(Failure.fromException(exception));
+    }
   }
 }

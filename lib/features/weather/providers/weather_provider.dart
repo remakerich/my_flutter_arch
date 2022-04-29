@@ -15,7 +15,9 @@ final weatherProvider =
 class WeatherNotifier extends StateNotifier<AsyncValue<CityWeather>> {
   WeatherNotifier(
     this._weatherService,
-  ) : super(const AsyncData(CityWeather()));
+  ) : super(const AsyncData(CityWeather())) {
+    started('New Delhi');
+  }
 
   final WeatherService _weatherService;
 

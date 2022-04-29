@@ -4,7 +4,7 @@
 
 Логин и профиль
 
-1. Firebase Auth по email и password.
+1. Регистрация аккаунта через Firebase Auth по email и password.
 2. Верификация аккаунта по ссылке на email.
 
 Чат

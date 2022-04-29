@@ -18,6 +18,14 @@ class LoginService {
           email: email,
           password: password,
         );
+        final user = FirebaseAuth.instance.currentUser;
+        if (user == null) {
+          throw Exception('Login failed');
+        }
+        if (!user.emailVerified) {
+          FirebaseAuth.instance.signOut();
+          throw Exception('E-mail is not verified!');
+        }
       },
     );
   }
@@ -26,5 +34,15 @@ class LoginService {
     return await catchException(
       () => FirebaseAuth.instance.signOut(),
     );
+  }
+
+  Either<Failure, bool> isLoggedIn() {
+    final user = FirebaseAuth.instance.currentUser;
+
+    if (user == null) {
+      return const Right(false);
+    } else {
+      return const Right(true);
+    }
   }
 }

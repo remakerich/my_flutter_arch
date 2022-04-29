@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myarchapp/core/injection/injection.dart';
 import 'package:myarchapp/core/router/router.dart';
 import 'package:myarchapp/core/utils/ui.dart';
+import 'package:myarchapp/features/auth/providers/login_provider.dart';
 
 void main() async {
   await initializeDependencies();
@@ -17,12 +18,14 @@ void main() async {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   MyApp({Key? key}) : super(key: key);
   final _appRouter = AppRouter();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.watch(loginProvider);
+
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.theme,

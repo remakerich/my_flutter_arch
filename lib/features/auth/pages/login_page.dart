@@ -5,7 +5,6 @@ import 'package:myarchapp/core/router/router.dart';
 import 'package:myarchapp/core/widgets/app_button.dart';
 import 'package:myarchapp/core/widgets/app_text_button.dart';
 import 'package:myarchapp/core/widgets/input_field.dart';
-import 'package:myarchapp/features/auth/providers/auth_provider.dart';
 import 'package:myarchapp/features/auth/providers/login_provider.dart';
 import 'package:myarchapp/features/auth/providers/register_provider.dart';
 
@@ -27,20 +26,23 @@ class LoginPage extends ConsumerWidget {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              const _LoginError(),
+              const _AuthStatusMessages(),
               AppInputField(
                 hint: 'E-mail',
                 controller: ref.read(loginProvider.notifier).emailController,
               ),
               AppInputField(
                 hint: 'Password',
-                controller: ref.read(loginProvider.notifier).passwordController,
+                controller:
+                    ref.read(loginProvider.notifier).passwordController,
                 isObscure: true,
               ),
               AppButton(
                 label: 'Sign In',
                 loading: loginState is AsyncLoading,
-                onPressed: () => ref.read(loginProvider.notifier).signIn(),
+                onPressed: () {
+                  ref.read(loginProvider.notifier).signIn(context);
+                },
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -60,17 +62,16 @@ class LoginPage extends ConsumerWidget {
   }
 }
 
-class _LoginError extends ConsumerWidget {
-  const _LoginError({Key? key}) : super(key: key);
+class _AuthStatusMessages extends ConsumerWidget {
+  const _AuthStatusMessages({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final loginState = ref.watch(loginProvider);
-    final authState = ref.watch(authProvider);
     final registerState = ref.watch(registerProvider);
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         registerState.maybeWhen(
           data: (isRegistered) {
@@ -78,7 +79,7 @@ class _LoginError extends ConsumerWidget {
               return const SizedBox();
             }
             return Text(
-              'You have successfully registered an account!\n\n'
+              'You have successfully registered an account!\n'
               'Please check your e-mail for verification link.',
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -87,17 +88,6 @@ class _LoginError extends ConsumerWidget {
               ),
             );
           },
-          orElse: () => const SizedBox(),
-        ),
-        authState.maybeWhen(
-          error: (error, stackTrace) => Text(
-            '$error $stackTrace',
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              color: Colors.red,
-              fontSize: 12,
-            ),
-          ),
           orElse: () => const SizedBox(),
         ),
         loginState.maybeWhen(

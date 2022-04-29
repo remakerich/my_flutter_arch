@@ -1,19 +1,21 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myarchapp/core/injection/injection.dart';
+import 'package:myarchapp/core/router/router.dart';
 import 'package:myarchapp/features/auth/services/login_service.dart';
 
 final loginProvider =
-    StateNotifierProvider.autoDispose<LoginProvider, AsyncValue<bool>>(
+    StateNotifierProvider.autoDispose<LoginNotifier, AsyncValue<bool>>(
   (ref) {
-    return LoginProvider(
+    return LoginNotifier(
       getIt<LoginService>(),
     );
   },
 );
 
-class LoginProvider extends StateNotifier<AsyncValue<bool>> {
-  LoginProvider(
+class LoginNotifier extends StateNotifier<AsyncValue<bool>> {
+  LoginNotifier(
     this._loginService,
   ) : super(const AsyncData(false));
 
@@ -29,7 +31,7 @@ class LoginProvider extends StateNotifier<AsyncValue<bool>> {
     super.dispose();
   }
 
-  void signIn() async {
+  void signIn(BuildContext context) async {
     state = const AsyncLoading();
 
     final result = await _loginService.signIn(
@@ -38,21 +40,32 @@ class LoginProvider extends StateNotifier<AsyncValue<bool>> {
     );
 
     result.when(
-      left: (failure) => state = AsyncError(failure),
+      left: (failure) async {
+        state = AsyncError(failure);
+        await Future.delayed(const Duration(seconds: 5));
+        state = const AsyncData(false);
+      },
       right: (_) {
+        context.router.replace(const NavigationRoute());
         state = const AsyncData(true);
+        passwordController.clear();
       },
     );
   }
 
-  void signOut() async {
+  void signOut(BuildContext context) async {
     state = const AsyncLoading();
 
     final result = await _loginService.signOut();
 
     result.when(
-      left: (failure) => state = AsyncError(failure),
-      right: (_) {},
+      left: (failure) {
+        state = AsyncError(failure);
+      },
+      right: (_) {
+        context.router.replace(const LoginRoute());
+        state = const AsyncData(true);
+      },
     );
   }
 }

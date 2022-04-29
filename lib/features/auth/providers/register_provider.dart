@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myarchapp/core/injection/injection.dart';
@@ -31,7 +32,7 @@ class RegisterNotifier extends StateNotifier<AsyncValue<bool>> {
     super.dispose();
   }
 
-  void started(BuildContext context) async {
+  void registerAccount(BuildContext context) async {
     state = const AsyncLoading();
 
     final result = await _registerService.registerAccount(
@@ -43,8 +44,13 @@ class RegisterNotifier extends StateNotifier<AsyncValue<bool>> {
     result.when(
       left: (failure) => state = AsyncError(failure),
       right: (_) async {
-        Navigator.of(context).pop();
+        nameController.clear();
+        emailController.clear();
+        passwordController.clear();
         state = const AsyncData(true);
+        context.router.pop();
+        await Future.delayed(const Duration(seconds: 5));
+        state = const AsyncData(false);
       },
     );
   }

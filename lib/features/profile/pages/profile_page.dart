@@ -12,7 +12,9 @@ class ProfilePage extends ConsumerWidget {
         title: const Text('Profile: Firebase'),
         actions: [
           IconButton(
-            onPressed: () => ref.read(loginProvider.notifier).signOut(),
+            onPressed: () {
+              ref.read(loginProvider.notifier).signOut(context);
+            },
             icon: const Icon(Icons.logout),
           ),
         ],

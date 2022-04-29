@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myarchapp/core/utils/ui.dart';
-import 'package:myarchapp/features/auth/pages/profile_page.dart';
+import 'package:myarchapp/features/profile/pages/profile_page.dart';
 import 'package:myarchapp/features/chat/pages/chat_list_page.dart';
 import 'package:myarchapp/features/navigation/providers/bottom_navigation_provider.dart';
 import 'package:myarchapp/features/weather/pages/weather_page.dart';

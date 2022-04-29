@@ -40,8 +40,9 @@ class RegisterPage extends ConsumerWidget {
               AppButton(
                 label: 'Register',
                 loading: registerState is AsyncLoading,
-                onPressed: () =>
-                    ref.read(registerProvider.notifier).started(context),
+                onPressed: () {
+                  ref.read(registerProvider.notifier).registerAccount(context);
+                },
               ),
             ],
           ),
@@ -59,19 +60,6 @@ class _RegisterResultMessage extends ConsumerWidget {
     final registerState = ref.watch(registerProvider);
 
     return registerState.maybeWhen(
-      data: (isRegistered) {
-        if (!isRegistered) {
-          return const SizedBox();
-        }
-        return Text(
-          'You have successfully registered an account!',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            color: Colors.green[900],
-            fontSize: 14,
-          ),
-        );
-      },
       error: (error, stackTrace) => Text(
         '$error $stackTrace',
         textAlign: TextAlign.center,

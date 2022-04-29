@@ -10,19 +10,11 @@ class AuthPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final authState = ref.watch(authProvider);
+    final isSignedIn = ref.watch(authProvider);
 
-    return authState.when(
-      data: (isAuthenticated) {
-        if (isAuthenticated) {
-          return const NavigationPage();
-        }
-        return const LoginPage();
-      },
-      error: (error, stackTrace) => const LoginPage(),
-      loading: () => const Scaffold(
-        body: CupertinoActivityIndicator(),
-      ),
-    );
+    if (isSignedIn) {
+      return const NavigationPage();
+    }
+    return const LoginPage();
   }
 }

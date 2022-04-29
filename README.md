@@ -2,6 +2,11 @@
 
 <img src="https://user-images.githubusercontent.com/85007290/164529980-32a7c11a-6dcb-4f3b-8e60-4ae9d6c734a6.png" height="400">
 
+Логин и профиль
+
+1. Firebase Auth по email и password.
+2. Верификация аккаунта по ссылке на email.
+
 Чат
 
 1. GraphQL сервер чата на Node.js (запускается локально).

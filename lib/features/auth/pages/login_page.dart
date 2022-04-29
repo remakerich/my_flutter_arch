@@ -19,32 +19,30 @@ class LoginPage extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('Login'),
       ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              const _AuthStatusMessages(),
-              AppInputField(
-                hint: 'E-mail',
-                controller: ref.read(loginProvider.notifier).emailController,
-              ),
-              AppInputField(
-                hint: 'Password',
-                controller:
-                    ref.read(loginProvider.notifier).passwordController,
-                isObscure: true,
-              ),
-              AppButton(
-                label: 'Sign In',
-                loading: loginState is AsyncLoading,
-                onPressed: () {
-                  ref.read(loginProvider.notifier).signIn(context);
-                },
-              ),
-              Row(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: Column(
+          children: [
+            const Expanded(child: SizedBox()),
+            const _AuthStatusMessages(),
+            AppInputField(
+              hint: 'E-mail',
+              controller: ref.read(loginProvider.notifier).emailController,
+            ),
+            AppInputField(
+              hint: 'Password',
+              controller: ref.read(loginProvider.notifier).passwordController,
+              isObscure: true,
+            ),
+            AppButton(
+              label: 'Sign In',
+              loading: loginState is AsyncLoading,
+              onPressed: () {
+                ref.read(loginProvider.notifier).signIn(context);
+              },
+            ),
+            SafeArea(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text('No account yet?'),
@@ -53,9 +51,9 @@ class LoginPage extends ConsumerWidget {
                     onPressed: () => context.router.push(const RegisterRoute()),
                   ),
                 ],
-              )
-            ],
-          ),
+              ),
+            )
+          ],
         ),
       ),
     );

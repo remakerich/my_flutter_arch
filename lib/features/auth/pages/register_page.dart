@@ -15,37 +15,36 @@ class RegisterPage extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('Register'),
       ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              const _RegisterResultMessage(),
-              AppInputField(
-                hint: 'Name',
-                controller: ref.read(registerProvider.notifier).nameController,
-              ),
-              AppInputField(
-                hint: 'E-mail',
-                controller: ref.read(registerProvider.notifier).emailController,
-              ),
-              AppInputField(
-                hint: 'Password',
-                isObscure: true,
-                controller:
-                    ref.read(registerProvider.notifier).passwordController,
-              ),
-              AppButton(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: Column(
+          children: [
+            const Expanded(child: SizedBox()),
+            const _RegisterResultMessage(),
+            AppInputField(
+              hint: 'Name',
+              controller: ref.read(registerProvider.notifier).nameController,
+            ),
+            AppInputField(
+              hint: 'E-mail',
+              controller: ref.read(registerProvider.notifier).emailController,
+            ),
+            AppInputField(
+              hint: 'Password',
+              isObscure: true,
+              controller:
+                  ref.read(registerProvider.notifier).passwordController,
+            ),
+            SafeArea(
+              child: AppButton(
                 label: 'Register',
                 loading: registerState is AsyncLoading,
                 onPressed: () {
                   ref.read(registerProvider.notifier).registerAccount(context);
                 },
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

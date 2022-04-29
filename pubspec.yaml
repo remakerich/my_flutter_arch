@@ -44,16 +44,16 @@ flutter:
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/system/logo.png"
+  image_path: "assets/system/icon.png"
 
 flutter_native_splash:
   color: "#ffffff"
   color_dark: "#1a1a1a"
-  image: assets/system/logo.png
-  image_dark: assets/system/logo.png
+  image: assets/system/icon.png
+  image_dark: assets/system/icon.png
   android_12:
-    image: assets/system/logo.png
-    image_dark: assets/system/logo.png
+    image: assets/system/android_12_splash.png
+    image_dark: assets/system/android_12_splash.png
     icon_background_color: "#ffffff"
     icon_background_color_dark: "#1a1a1a"
   android: true

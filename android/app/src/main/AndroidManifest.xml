@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.graphql_riverpod_chat">
    <application
-        android:label="graphql_riverpod_chat"
+        android:label="Weather"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity

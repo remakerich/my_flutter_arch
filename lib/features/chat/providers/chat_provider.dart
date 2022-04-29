@@ -36,10 +36,10 @@ class ChatNotifier extends StateNotifier<AsyncValue<List<Message>>> {
     return super.dispose();
   }
 
-  void started() {
+  void started() async {
     state = const AsyncLoading();
 
-    final result = _chatService.subscribeToChat();
+    final result = await _chatService.subscribeToChat();
 
     result.when(
       left: (failure) => state = AsyncError(failure),

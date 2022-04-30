@@ -6,6 +6,7 @@ class AppInputField extends StatelessWidget {
     required this.hint,
     this.onChanged,
     this.controller,
+    this.onSubmitted,
     this.isObscure = false,
   }) : super(key: key);
 
@@ -13,6 +14,8 @@ class AppInputField extends StatelessWidget {
   final Function(String)? onChanged;
   final TextEditingController? controller;
   final bool isObscure;
+  final Function(String)? onSubmitted;
+
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +31,7 @@ class AppInputField extends StatelessWidget {
         ),
       ),
       child: TextField(
+        onSubmitted: onSubmitted,
         cursorColor: Theme.of(context).textSelectionTheme.cursorColor,
         cursorWidth: 1,
         onChanged: onChanged,

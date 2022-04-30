@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myarchapp/core/utils/ui.dart';
 import 'package:myarchapp/core/widgets/language_bottom_sheet.dart';
 import 'package:myarchapp/core/widgets/theme_bottom_sheet.dart';
+import 'package:myarchapp/features/auth/providers/login_provider.dart';
 import 'package:myarchapp/features/settings/providers/language_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:myarchapp/features/settings/providers/theme_provider.dart';
@@ -36,6 +37,12 @@ class SettingsPage extends ConsumerWidget {
             label: locale.theme,
             currentSetting: themeState.name,
             bottomSheet: const ThemeBottomSheet(),
+          ),
+          IconButton(
+            onPressed: () {
+              ref.read(loginProvider.notifier).signOut(context);
+            },
+            icon: const Icon(Icons.logout),
           ),
         ],
       ),

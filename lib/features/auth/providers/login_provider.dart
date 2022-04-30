@@ -61,6 +61,7 @@ class LoginNotifier extends StateNotifier<AsyncValue<bool>> {
         state = AsyncError(failure);
       },
       right: (_) {
+        Navigator.of(context).pop();
         context.router.replace(const LoginRoute());
         state = const AsyncData(true);
       },

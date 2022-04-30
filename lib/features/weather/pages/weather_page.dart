@@ -6,7 +6,6 @@ import 'package:myarchapp/core/utils/ui.dart';
 import 'package:myarchapp/core/widgets/input_field.dart';
 import 'package:myarchapp/features/weather/models/city_weather.dart';
 import 'package:myarchapp/features/weather/providers/weather_provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class WeatherPage extends ConsumerWidget {
   const WeatherPage({Key? key}) : super(key: key);
@@ -14,50 +13,49 @@ class WeatherPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final weatherState = ref.watch(weatherProvider);
-    final locale = AppLocalizations.of(context)!;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(locale.weatherHeader),
-      ),
-      body: Column(
-        children: [
-          Row(
-            children: [
-              const SizedBox(width: 10),
-              Expanded(
-                child: AppInputField(
-                  hint: 'Enter city',
-                  controller: ref.read(weatherProvider.notifier).cityController,
+      body: SafeArea(
+        child: Column(
+          children: [
+            Row(
+              children: [
+                const SizedBox(width: 10),
+                Expanded(
+                  child: AppInputField(
+                    hint: 'Enter city',
+                    controller:
+                        ref.read(weatherProvider.notifier).cityController,
+                    onSubmitted: (_) =>
+                        ref.read(weatherProvider.notifier).started(),
+                  ),
                 ),
-              ),
-              IconButton(
-                onPressed: () {
-                  ref.read(weatherProvider.notifier).started();
-                },
-                icon: const Icon(Icons.search),
-              )
-            ],
-          ),
-          Expanded(
-            child: Center(
-              child: weatherState.when(
-                data: (weather) {
-                  if (weather.city.isEmpty) {
-                    return const Text('Search city...');
-                  }
-                  return _WeatherInfo(weather);
-                },
-                error: (error, stackTrace) => const Center(
-                  child: Text('Not found'),
-                ),
-                loading: () => const Center(
-                  child: CupertinoActivityIndicator(),
+                IconButton(
+                  onPressed: () => ref.read(weatherProvider.notifier).started(),
+                  icon: const Icon(Icons.search),
+                )
+              ],
+            ),
+            Expanded(
+              child: Center(
+                child: weatherState.when(
+                  data: (weather) {
+                    if (weather.city.isEmpty) {
+                      return const Text('Search city...');
+                    }
+                    return _WeatherInfo(weather);
+                  },
+                  error: (error, stackTrace) => const Center(
+                    child: Text('Not found'),
+                  ),
+                  loading: () => const Center(
+                    child: CupertinoActivityIndicator(),
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

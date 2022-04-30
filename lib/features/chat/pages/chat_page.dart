@@ -15,7 +15,7 @@ class ChatPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('GraphQL + WebSocket'),
+        title: const Text('Chat room'),
       ),
       body: Column(
         children: const [

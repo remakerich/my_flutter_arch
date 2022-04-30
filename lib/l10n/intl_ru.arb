@@ -11,6 +11,8 @@
     "chatRoom": "Комната чата",
     "message": "Сообщение",
     "weatherHeader": "Погода: REST",
-    "language": "Язык",
-    "chooseLanguage": "Выберите язык:"
+    "language": "Язык:",
+    "chooseLanguage": "Выберите язык:",
+    "chooseTheme": "Выберите тему оформления:",
+    "theme": "Тема:"
 }

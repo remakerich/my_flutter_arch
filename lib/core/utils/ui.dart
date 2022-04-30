@@ -22,7 +22,32 @@ abstract class AppTheme {
       elevation: 0,
       backgroundColor: AppColors.accent,
     ),
+    cardColor: Colors.grey[300],
+    textSelectionTheme: const TextSelectionThemeData(
+      cursorColor: Colors.black,
+    ),
   );
+
+  static final darkTheme = ThemeData(
+    brightness: Brightness.dark,
+    appBarTheme: const AppBarTheme(
+      systemOverlayStyle: SystemUiOverlayStyle(
+        statusBarBrightness: Brightness.light,
+      ),
+      centerTitle: true,
+      elevation: 0,
+      backgroundColor: AppColors.accent,
+    ),
+    textSelectionTheme: const TextSelectionThemeData(
+      cursorColor: Colors.white,
+    ),
+  );
+
+  static const allThemes = [
+    ThemeMode.dark,
+    ThemeMode.light,
+    ThemeMode.system,
+  ];
 }
 
 abstract class AppShapes {

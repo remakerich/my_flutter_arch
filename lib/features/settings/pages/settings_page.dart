@@ -2,64 +2,76 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myarchapp/core/utils/ui.dart';
 import 'package:myarchapp/core/widgets/language_bottom_sheet.dart';
+import 'package:myarchapp/core/widgets/theme_bottom_sheet.dart';
 import 'package:myarchapp/features/settings/providers/language_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:myarchapp/features/settings/providers/theme_provider.dart';
 
-class SettingsPage extends StatelessWidget {
+class SettingsPage extends ConsumerWidget {
   const SettingsPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final locale = AppLocalizations.of(context)!;
+    final languageState = ref.watch(languageProvider);
+    final themeState = ref.watch(themeProvider);
+    final isLightTheme = Theme.of(context).brightness == Brightness.light;
 
     return Scaffold(
       appBar: AppBar(
         title: Text(locale.settings),
       ),
-      body: const _LanguageSettings(),
+      body: ListView(
+        children: [
+          _SettingMenuItem(
+            icon: Icons.language,
+            label: locale.language,
+            currentSetting: languageState,
+            bottomSheet: const LanguageBottomSheet(),
+          ),
+          _SettingMenuItem(
+            icon: isLightTheme
+                ? Icons.light_mode_outlined
+                : Icons.dark_mode_outlined,
+            label: locale.theme,
+            currentSetting: themeState.name,
+            bottomSheet: const ThemeBottomSheet(),
+          ),
+        ],
+      ),
     );
   }
 }
 
-class _LanguageSettings extends ConsumerWidget {
-  const _LanguageSettings({Key? key}) : super(key: key);
+class _SettingMenuItem extends StatelessWidget {
+  const _SettingMenuItem({
+    Key? key,
+    required this.icon,
+    required this.label,
+    required this.currentSetting,
+    required this.bottomSheet,
+  }) : super(key: key);
+
+  final IconData icon;
+  final String label;
+  final String currentSetting;
+  final Widget bottomSheet;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final languageState = ref.watch(languageProvider);
-    final locale = AppLocalizations.of(context)!;
-
+  Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(10),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          padding: const EdgeInsets.all(10),
-          primary: Colors.grey[400],
-          elevation: 0,
-          shadowColor: Colors.transparent,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-        ),
-        child: Row(
-          children: [
-            const Icon(Icons.language),
-            const SizedBox(width: 10),
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(locale.language),
-                Text(languageState),
-              ],
-            )
-          ],
-        ),
-        onPressed: () {
+      padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+      child: ListTile(
+        tileColor: Theme.of(context).cardColor,
+        shape: AppShapes.listTileShape,
+        leading: Icon(icon),
+        title: Text(label),
+        subtitle: Text(currentSetting),
+        onTap: () {
           showModalBottomSheet(
             shape: AppShapes.bottomSheetShape,
             context: context,
-            builder: (context) => const LanguageBottomSheet(),
+            builder: (context) => bottomSheet,
           );
         },
       ),

@@ -21,14 +21,14 @@ class AppInputField extends StatelessWidget {
       alignment: Alignment.center,
       margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
           color: Colors.grey,
         ),
       ),
       child: TextField(
-        cursorColor: Colors.black,
+        cursorColor: Theme.of(context).textSelectionTheme.cursorColor,
         cursorWidth: 1,
         onChanged: onChanged,
         controller: controller,

@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myarchapp/core/utils/ui.dart';
-import 'package:myarchapp/features/settings/providers/language_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:myarchapp/features/settings/providers/theme_provider.dart';
 
-class LanguageBottomSheet extends ConsumerWidget {
-  const LanguageBottomSheet({Key? key}) : super(key: key);
+class ThemeBottomSheet extends ConsumerWidget {
+  const ThemeBottomSheet({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final localesNumber = AppLocalizations.supportedLocales.length;
-    final languageState = ref.watch(languageProvider);
     final locale = AppLocalizations.of(context)!;
+    final themeState = ref.watch(themeProvider);
 
     return SafeArea(
       child: Padding(
@@ -22,7 +21,7 @@ class LanguageBottomSheet extends ConsumerWidget {
           children: [
             const SizedBox(height: 10),
             Text(
-              locale.chooseLanguage,
+              locale.chooseTheme,
               style: const TextStyle(
                 fontWeight: FontWeight.w500,
               ),
@@ -31,26 +30,22 @@ class LanguageBottomSheet extends ConsumerWidget {
             Column(
               mainAxisSize: MainAxisSize.min,
               children: List.generate(
-                localesNumber,
+                AppTheme.allThemes.length,
                 (index) {
-                  final localeName =
-                      AppLocalizations.supportedLocales[index].languageCode;
-
                   return ListTile(
                     shape: AppShapes.listTileShape,
                     dense: true,
-                    tileColor: localeName == languageState
+                    tileColor: AppTheme.allThemes[index] == themeState
                         ? Theme.of(context).cardColor
                         : Colors.transparent,
+                    title: Text(
+                      AppTheme.allThemes[index].name,
+                    ),
                     onTap: () {
-                      ref
-                          .read(languageProvider.notifier)
-                          .setLanguage(localeName);
+                      ref.read(themeProvider.notifier).state =
+                          AppTheme.allThemes[index];
                       Navigator.of(context).pop();
                     },
-                    title: Text(
-                      localeName,
-                    ),
                   );
                 },
               ),

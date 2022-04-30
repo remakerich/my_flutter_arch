@@ -11,6 +11,8 @@
     "chatRoom": "Chat room",
     "message": "Message",
     "weatherHeader": "Weather: REST",
-    "language": "Language",
-    "chooseLanguage": "Choose the language:"
+    "language": "Language:",
+    "chooseLanguage": "Choose the language:",
+    "chooseTheme": "Choose the theme:",
+    "theme": "Theme:"
 }

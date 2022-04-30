@@ -2,5 +2,15 @@
     "login": "Sign In",
     "register": "Register",
     "settings": "Settings",
-    "profileHeader": "Profile: Firebase"
+    "profileHeader": "Profile: Firebase",
+    "password": "Password",
+    "noAccountYet": "No account yet?",
+    "registrationSuccessful": "You have successfully registered an account!\nPlease check your e-mail for verification link.",
+    "name": "Name",
+    "chat": "Chat: GraphQL + WebSocket",
+    "chatRoom": "Chat room",
+    "message": "Message",
+    "weatherHeader": "Weather: REST",
+    "language": "Language",
+    "chooseLanguage": "Choose the language:"
 }

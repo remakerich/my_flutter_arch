@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:myarchapp/core/utils/ui.dart';
 import 'package:myarchapp/core/widgets/input_field.dart';
 import 'package:myarchapp/features/chat/models/message.dart';
 import 'package:myarchapp/features/chat/providers/chat_provider.dart';
 import 'package:myarchapp/features/chat/providers/message_provider.dart';
 import 'package:myarchapp/features/chat/providers/user_name_provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChatPage extends StatelessWidget {
   const ChatPage({Key? key}) : super(key: key);
@@ -134,6 +134,7 @@ class _InputArea extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final messageNotifier = ref.watch(messageProvider.notifier);
+    final locale = AppLocalizations.of(context)!;
 
     return SafeArea(
       child: Row(
@@ -142,7 +143,7 @@ class _InputArea extends ConsumerWidget {
           Expanded(
             flex: 1,
             child: AppInputField(
-              hint: 'Username',
+              hint: locale.name,
               onChanged: (userName) {
                 ref.read(userNameProvider.notifier).state = userName;
               },
@@ -152,7 +153,7 @@ class _InputArea extends ConsumerWidget {
           Expanded(
             flex: 2,
             child: AppInputField(
-              hint: 'Message',
+              hint: locale.message,
               controller: messageNotifier.messageController,
             ),
           ),

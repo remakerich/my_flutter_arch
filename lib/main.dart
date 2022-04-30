@@ -35,14 +35,9 @@ class MyApp extends ConsumerWidget {
       theme: AppTheme.theme,
       routerDelegate: _appRouter.delegate(),
       routeInformationParser: _appRouter.defaultRouteParser(),
-      supportedLocales: AppLanguages.supportedLocales,
+      supportedLocales: AppLocalizations.supportedLocales,
       locale: Locale(languageState),
-      localizationsDelegates: const [
-        GlobalCupertinoLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        AppLocalizations.delegate,
-      ],
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
     );
   }
 }

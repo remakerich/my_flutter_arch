@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myarchapp/core/utils/ui.dart';
+import 'package:myarchapp/core/widgets/language_bottom_sheet.dart';
 import 'package:myarchapp/features/settings/providers/language_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -26,6 +27,7 @@ class _LanguageSettings extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final languageState = ref.watch(languageProvider);
+    final locale = AppLocalizations.of(context)!;
 
     return Padding(
       padding: const EdgeInsets.all(10),
@@ -47,7 +49,7 @@ class _LanguageSettings extends ConsumerWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Language'),
+                Text(locale.language),
                 Text(languageState),
               ],
             )
@@ -57,66 +59,9 @@ class _LanguageSettings extends ConsumerWidget {
           showModalBottomSheet(
             shape: AppShapes.bottomSheetShape,
             context: context,
-            builder: (context) => const _LanguageBottomSheet(),
+            builder: (context) => const LanguageBottomSheet(),
           );
         },
-      ),
-    );
-  }
-}
-
-class _LanguageBottomSheet extends ConsumerWidget {
-  const _LanguageBottomSheet({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final localesNumber = AppLanguages.supportedLocales.length;
-    final languageState = ref.watch(languageProvider);
-
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 10),
-            const Text(
-              'Choose a language:',
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            const SizedBox(height: 10),
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: List.generate(
-                localesNumber,
-                (index) {
-                  final localeName =
-                      AppLanguages.supportedLocales[index].languageCode;
-
-                  return ListTile(
-                    shape: AppShapes.listTileShape,
-                    dense: true,
-                    tileColor: localeName == languageState
-                        ? Colors.grey[300]
-                        : Colors.transparent,
-                    onTap: () {
-                      ref
-                          .read(languageProvider.notifier)
-                          .setLanguage(localeName);
-                      Navigator.of(context).pop();
-                    },
-                    title: Text(
-                      localeName,
-                    ),
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }

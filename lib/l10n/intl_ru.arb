@@ -2,5 +2,15 @@
     "login": "Войти",
     "register": "Регистрация",
     "settings": "Настройки",
-    "profileHeader": "Профиль: Firebase"
+    "profileHeader": "Профиль: Firebase",
+    "password": "Пароль",
+    "noAccountYet": "Нет аккаунта?",
+    "registrationSuccessful": "Вы успешно зарегистрировали аккаунт!\nНа Ваш e-mail отправлена ссылка для подтверждения.",
+    "name": "Имя",
+    "chat": "Чат: GraphQL + WebSocket",
+    "chatRoom": "Комната чата",
+    "message": "Сообщение",
+    "weatherHeader": "Погода: REST",
+    "language": "Язык",
+    "chooseLanguage": "Выберите язык:"
 }

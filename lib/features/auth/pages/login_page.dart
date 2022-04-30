@@ -2,9 +2,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myarchapp/core/router/router.dart';
+import 'package:myarchapp/core/utils/ui.dart';
 import 'package:myarchapp/core/widgets/app_button.dart';
 import 'package:myarchapp/core/widgets/app_text_button.dart';
 import 'package:myarchapp/core/widgets/input_field.dart';
+import 'package:myarchapp/core/widgets/language_bottom_sheet.dart';
 import 'package:myarchapp/features/auth/providers/login_provider.dart';
 import 'package:myarchapp/features/auth/providers/register_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -20,6 +22,20 @@ class LoginPage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(locale.login),
+        actions: [
+          IconButton(
+            onPressed: () {
+              showModalBottomSheet(
+                shape: AppShapes.bottomSheetShape,
+                context: context,
+                builder: (context) => const LanguageBottomSheet(),
+              );
+            },
+            icon: const Icon(
+              Icons.language,
+            ),
+          )
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -32,7 +48,7 @@ class LoginPage extends ConsumerWidget {
               controller: ref.read(loginProvider.notifier).emailController,
             ),
             AppInputField(
-              hint: 'Password',
+              hint: locale.password,
               controller: ref.read(loginProvider.notifier).passwordController,
               isObscure: true,
             ),
@@ -47,7 +63,7 @@ class LoginPage extends ConsumerWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text('No account yet?'),
+                  Text(locale.noAccountYet),
                   AppTextButton(
                     label: locale.register,
                     onPressed: () => context.router.push(const RegisterRoute()),
@@ -69,6 +85,7 @@ class _AuthStatusMessages extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final loginState = ref.watch(loginProvider);
     final registerState = ref.watch(registerProvider);
+    final locale = AppLocalizations.of(context)!;
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -79,8 +96,7 @@ class _AuthStatusMessages extends ConsumerWidget {
               return const SizedBox();
             }
             return Text(
-              'You have successfully registered an account!\n'
-              'Please check your e-mail for verification link.',
+              locale.registrationSuccessful,
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.green[900],

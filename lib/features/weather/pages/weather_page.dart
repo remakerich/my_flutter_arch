@@ -6,6 +6,7 @@ import 'package:myarchapp/core/utils/ui.dart';
 import 'package:myarchapp/core/widgets/input_field.dart';
 import 'package:myarchapp/features/weather/models/city_weather.dart';
 import 'package:myarchapp/features/weather/providers/weather_provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class WeatherPage extends ConsumerWidget {
   const WeatherPage({Key? key}) : super(key: key);
@@ -13,10 +14,11 @@ class WeatherPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final weatherState = ref.watch(weatherProvider);
+    final locale = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Weather: REST'),
+        title: Text(locale.weatherHeader),
       ),
       body: Column(
         children: [

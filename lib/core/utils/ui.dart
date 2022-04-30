@@ -37,10 +37,3 @@ abstract class AppShapes {
     borderRadius: BorderRadius.circular(12),
   );
 }
-
-class AppLanguages {
-  static const supportedLocales = [
-    Locale('en', ''),
-    Locale('ru', ''),
-  ];
-}

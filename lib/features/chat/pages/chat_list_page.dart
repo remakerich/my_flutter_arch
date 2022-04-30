@@ -2,15 +2,18 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myarchapp/core/router/router.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChatListPage extends ConsumerWidget {
   const ChatListPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final locale = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Chat: GraphQL'),
+        title: Text(locale.chat),
       ),
       body: ListView.builder(
         physics: const BouncingScrollPhysics(),
@@ -29,10 +32,10 @@ class ChatListPage extends ConsumerWidget {
                     child: Center(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          Text('Chat room'),
-                          SizedBox(width: 10),
-                          Icon(Icons.chevron_right_rounded)
+                        children: [
+                          Text(locale.chatRoom),
+                          const SizedBox(width: 10),
+                          const Icon(Icons.chevron_right_rounded)
                         ],
                       ),
                     ),

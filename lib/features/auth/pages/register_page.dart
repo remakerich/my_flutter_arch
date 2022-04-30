@@ -24,7 +24,7 @@ class RegisterPage extends ConsumerWidget {
             const Expanded(child: SizedBox()),
             const _RegisterResultMessage(),
             AppInputField(
-              hint: 'Name',
+              hint: locale.name,
               controller: ref.read(registerProvider.notifier).nameController,
             ),
             AppInputField(
@@ -32,14 +32,14 @@ class RegisterPage extends ConsumerWidget {
               controller: ref.read(registerProvider.notifier).emailController,
             ),
             AppInputField(
-              hint: 'Password',
+              hint: locale.password,
               isObscure: true,
               controller:
                   ref.read(registerProvider.notifier).passwordController,
             ),
             SafeArea(
               child: AppButton(
-                label: 'Register',
+                label: locale.register,
                 loading: registerState is AsyncLoading,
                 onPressed: () {
                   ref.read(registerProvider.notifier).registerAccount(context);

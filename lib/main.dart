@@ -5,6 +5,7 @@ import 'package:myarchapp/core/injection/injection.dart';
 import 'package:myarchapp/core/router/router.dart';
 import 'package:myarchapp/core/utils/ui.dart';
 import 'package:myarchapp/features/auth/providers/login_provider.dart';
+import 'package:myarchapp/features/settings/providers/language_provider.dart';
 import 'package:myarchapp/generated/l10n.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -27,6 +28,7 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.watch(loginProvider);
+    final languageState = ref.watch(languageProvider);
 
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
@@ -34,6 +36,7 @@ class MyApp extends ConsumerWidget {
       routerDelegate: _appRouter.delegate(),
       routeInformationParser: _appRouter.defaultRouteParser(),
       supportedLocales: S.delegate.supportedLocales,
+      locale: Locale(languageState),
       localizationsDelegates: const [
         GlobalCupertinoLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,

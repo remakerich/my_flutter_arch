@@ -20,14 +20,22 @@ class WeatherPage extends ConsumerWidget {
       ),
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: AppInputField(
-              hint: 'Enter city',
-              onChanged: (city) {
-                ref.read(weatherProvider.notifier).started(city);
-              },
-            ),
+          Row(
+            children: [
+              const SizedBox(width: 10),
+              Expanded(
+                child: AppInputField(
+                  hint: 'Enter city',
+                  controller: ref.read(weatherProvider.notifier).cityController,
+                ),
+              ),
+              IconButton(
+                onPressed: () {
+                  ref.read(weatherProvider.notifier).started();
+                },
+                icon: const Icon(Icons.search),
+              )
+            ],
           ),
           Expanded(
             child: Center(

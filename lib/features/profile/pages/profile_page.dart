@@ -36,13 +36,13 @@ class ProfilePage extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Stack(
-                  children: const [
+                  children: [
                     Icon(
                       CupertinoIcons.profile_circled,
                       size: 100,
-                      color: Colors.grey,
+                      color: Colors.grey[400],
                     ),
-                    Positioned(
+                    const Positioned(
                       right: -5,
                       bottom: -5,
                       child: _RotatingGear(),

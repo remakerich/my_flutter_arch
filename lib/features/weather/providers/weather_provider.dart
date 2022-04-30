@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myarchapp/core/injection/injection.dart';
 import 'package:myarchapp/features/weather/models/city_weather.dart';
@@ -16,15 +17,22 @@ class WeatherNotifier extends StateNotifier<AsyncValue<CityWeather>> {
   WeatherNotifier(
     this._weatherService,
   ) : super(const AsyncData(CityWeather())) {
-    started('New Delhi');
+    started();
   }
 
   final WeatherService _weatherService;
+  final cityController = TextEditingController(text: 'New Delhi');
 
-  void started(String city) async {
+  @override
+  void dispose() {
+    cityController.dispose();
+    super.dispose();
+  }
+
+  void started() async {
     state = const AsyncLoading();
 
-    final result = await _weatherService.getCityWeather(city);
+    final result = await _weatherService.getCityWeather(cityController.text);
 
     result.when(
       left: (failure) => state = AsyncError(failure),

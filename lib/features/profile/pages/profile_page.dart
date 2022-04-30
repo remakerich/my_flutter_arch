@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +7,7 @@ import 'package:myarchapp/core/router/router.dart';
 import 'package:myarchapp/core/utils/ui.dart';
 import 'package:myarchapp/features/auth/providers/login_provider.dart';
 import 'package:myarchapp/features/profile/providers/profile_provider.dart';
-import 'package:myarchapp/generated/l10n.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfilePage extends ConsumerWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -16,10 +15,11 @@ class ProfilePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final profileState = ref.watch(profileProvider);
+    final locale = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(S.current.profileHeader),
+        title: Text(locale.profileHeader),
         actions: [
           IconButton(
             onPressed: () {

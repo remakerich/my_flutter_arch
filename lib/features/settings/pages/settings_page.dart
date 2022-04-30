@@ -2,16 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myarchapp/core/utils/ui.dart';
 import 'package:myarchapp/features/settings/providers/language_provider.dart';
-import 'package:myarchapp/generated/l10n.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final locale = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(S.current.settings),
+        title: Text(locale.settings),
       ),
       body: const _LanguageSettings(),
     );
@@ -68,7 +70,7 @@ class _LanguageBottomSheet extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final localesNumber = S.delegate.supportedLocales.length;
+    final localesNumber = AppLanguages.supportedLocales.length;
     final languageState = ref.watch(languageProvider);
 
     return SafeArea(
@@ -92,7 +94,7 @@ class _LanguageBottomSheet extends ConsumerWidget {
                 localesNumber,
                 (index) {
                   final localeName =
-                      S.delegate.supportedLocales[index].languageCode;
+                      AppLanguages.supportedLocales[index].languageCode;
 
                   return ListTile(
                     shape: AppShapes.listTileShape,
@@ -101,7 +103,9 @@ class _LanguageBottomSheet extends ConsumerWidget {
                         ? Colors.grey[300]
                         : Colors.transparent,
                     onTap: () {
-                      ref.read(languageProvider.notifier).state = localeName;
+                      ref
+                          .read(languageProvider.notifier)
+                          .setLanguage(localeName);
                       Navigator.of(context).pop();
                     },
                     title: Text(

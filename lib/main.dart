@@ -6,8 +6,8 @@ import 'package:myarchapp/core/router/router.dart';
 import 'package:myarchapp/core/utils/ui.dart';
 import 'package:myarchapp/features/auth/providers/login_provider.dart';
 import 'package:myarchapp/features/settings/providers/language_provider.dart';
-import 'package:myarchapp/generated/l10n.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async {
   await initializeDependencies();
@@ -35,13 +35,13 @@ class MyApp extends ConsumerWidget {
       theme: AppTheme.theme,
       routerDelegate: _appRouter.delegate(),
       routeInformationParser: _appRouter.defaultRouteParser(),
-      supportedLocales: S.delegate.supportedLocales,
+      supportedLocales: AppLanguages.supportedLocales,
       locale: Locale(languageState),
       localizationsDelegates: const [
         GlobalCupertinoLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
-        S.delegate,
+        AppLocalizations.delegate,
       ],
     );
   }

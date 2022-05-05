@@ -49,11 +49,41 @@ class SettingsPage extends ConsumerWidget {
           ),
           IconButton(
             onPressed: () {
-              ref.read(loginProvider.notifier).signOut(context);
+              showModalBottomSheet(
+                shape: AppShapes.bottomSheetShape,
+                context: context,
+                builder: (context) => const _SignOutBottomSheet(),
+              );
             },
             icon: const Icon(Icons.logout),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _SignOutBottomSheet extends ConsumerWidget {
+  const _SignOutBottomSheet({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final locale = AppLocalizations.of(context)!;
+
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: ListTile(
+          shape: AppShapes.listTileShape,
+          leading: const Icon(
+            Icons.logout,
+            color: Colors.red,
+          ),
+          title: Text(locale.signOut),
+          onTap: () {
+            ref.read(loginProvider.notifier).signOut(context);
+          },
+        ),
       ),
     );
   }

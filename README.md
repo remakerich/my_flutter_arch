@@ -1,6 +1,7 @@
 ## features
 
-<img src="https://user-images.githubusercontent.com/85007290/164529980-32a7c11a-6dcb-4f3b-8e60-4ae9d6c734a6.png" height="400">
+![latest scrrens](https://user-images.githubusercontent.com/85007290/166112986-1cffcd1a-eea9-40fa-bf6e-e3535c2c2488.png)
+Клиент на Flutter с использованием менеджера состояний Riverpod.
 
 Логин и профиль
 
@@ -10,14 +11,13 @@
 Чат
 
 1. GraphQL сервер чата на Node.js (запускается локально).
-2. Клиент на Flutter с использованием менеджера состояний Riverpod.
-3. Подписка на сообщения в чате осуществляется с помощью WebSocket.
+2. Подписка на сообщения в чате осуществляется с помощью WebSocket.
 
 Погодa
 
 1. Клиент Dio + автогенерация кода REST-запросов с помощью пакета Retrofit
 
-## graphQL server
+## graphQL chat server
 
 - `cd server`
 - `yarn install`

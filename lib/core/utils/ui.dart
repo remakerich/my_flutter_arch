@@ -32,7 +32,7 @@ abstract class AppTheme {
     brightness: Brightness.dark,
     appBarTheme: const AppBarTheme(
       systemOverlayStyle: SystemUiOverlayStyle(
-        statusBarBrightness: Brightness.light,
+        statusBarBrightness: Brightness.dark,
       ),
       centerTitle: true,
       elevation: 0,

@@ -14,5 +14,10 @@
     "language": "Language:",
     "chooseLanguage": "Choose the language:",
     "chooseTheme": "Choose the theme:",
-    "theme": "Theme:"
+    "theme": "Theme:",
+    "aboutApp": "About App",
+    "aboutAppSubtitle": "Version, changelog and more...",
+    "appVersion": "App Version:",
+    "historyOfChanges": "History of changes:",
+    "changelog": "0.1.0\n\nApplication\n- Flutter client with Riverpod state manager.\n\nSign in and profile\n- Account register via Firebase Auth with email и password.\n- Account verification via email link.\n\nChat\n- GraphQL chat server on Node.js (lauched locally).\n- Chat messaged subscription via WebSocket.\n\nWeather\n- Dio http client + codegen with Retrofit"
 }

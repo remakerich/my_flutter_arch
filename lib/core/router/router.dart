@@ -5,6 +5,7 @@ import 'package:myarchapp/features/auth/pages/login_page.dart';
 import 'package:myarchapp/features/auth/pages/register_page.dart';
 import 'package:myarchapp/features/chat/pages/chat_page.dart';
 import 'package:myarchapp/features/navigation/pages/navigation_page.dart';
+import 'package:myarchapp/features/settings/pages/about_app_page.dart';
 import 'package:myarchapp/features/settings/pages/settings_page.dart';
 
 part 'router.gr.dart';
@@ -18,6 +19,7 @@ part 'router.gr.dart';
     AutoRoute(page: LoginPage),
     AutoRoute(page: RegisterPage),
     AutoRoute(page: SettingsPage),
+    AutoRoute(page: AboutAppPage),
   ],
 )
 class AppRouter extends _$AppRouter {}

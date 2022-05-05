@@ -25,6 +25,7 @@ dependencies:
   firebase_auth: ^3.3.7
   modal_bottom_sheet: ^2.0.1
   package_info_plus: ^1.4.2
+  flutter_secure_storage: ^5.0.2
 
 dev_dependencies:
   flutter_test:

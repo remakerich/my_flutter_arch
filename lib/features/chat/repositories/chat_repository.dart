@@ -1,6 +1,6 @@
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:injectable/injectable.dart';
-import 'package:myarchapp/core/network/gql_client.dart';
+import 'package:myarchapp/core/injection/gql_client.dart';
 import 'package:myarchapp/features/chat/repositories/queries.dart';
 
 @LazySingleton()

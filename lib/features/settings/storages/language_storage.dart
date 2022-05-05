@@ -33,7 +33,7 @@ class LanguageStorage {
     try {
       final result = await _secureStorage.read(key: key);
 
-      return Right(result!);
+      return Right(result!.replaceAll('"', ''));
     } catch (exception) {
       return Left(Failure.fromException(exception));
     }

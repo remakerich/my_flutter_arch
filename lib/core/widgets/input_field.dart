@@ -45,7 +45,7 @@ class AppInputField extends StatelessWidget {
             : validator,
         decoration: InputDecoration(
           filled: true,
-          fillColor: Colors.grey[300],
+          fillColor: Theme.of(context).cardColor,
           contentPadding: const EdgeInsets.all(AppShapes.padding),
           hintText: hint,
           isDense: true,

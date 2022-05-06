@@ -44,9 +44,12 @@ class AppInputField extends StatelessWidget {
               }
             : validator,
         decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.grey[300],
           contentPadding: const EdgeInsets.all(AppShapes.padding),
           hintText: hint,
           isDense: true,
+          isCollapsed: true,
           errorStyle: TextStyle(
             color: Theme.of(context).errorColor,
           ),
@@ -72,7 +75,6 @@ class AppInputField extends StatelessWidget {
           ),
           floatingLabelStyle:
               TextStyle(color: Theme.of(context).textTheme.bodyText2?.color),
-          isCollapsed: true,
         ),
       ),
     );

@@ -18,6 +18,7 @@ class LoginPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final loginState = ref.watch(loginProvider);
     final locale = AppLocalizations.of(context)!;
+    final _formKey = GlobalKey<FormState>();
 
     return Scaffold(
       appBar: AppBar(
@@ -43,19 +44,34 @@ class LoginPage extends ConsumerWidget {
           children: [
             const Expanded(child: SizedBox()),
             const _AuthStatusMessages(),
-            AppInputField(
-              hint: 'E-mail',
-              controller: ref.read(loginProvider.notifier).emailController,
-            ),
-            AppInputField(
-              hint: locale.password,
-              controller: ref.read(loginProvider.notifier).passwordController,
-              isObscure: true,
+            Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  AppInputField(
+                    hint: 'E-mail',
+                    controller:
+                        ref.read(loginProvider.notifier).emailController,
+                    hasDefaultValidator: true,
+                    defaultValidatorErrorMessage: '${locale.enter} e-mail',
+                  ),
+                  AppInputField(
+                    hint: locale.password,
+                    controller:
+                        ref.read(loginProvider.notifier).passwordController,
+                    isObscure: true,
+                    hasDefaultValidator: true,
+                    defaultValidatorErrorMessage:
+                        '${locale.enter} ${locale.password}',
+                  ),
+                ],
+              ),
             ),
             AppButton(
               label: locale.login,
               loading: loginState is AsyncLoading,
               onPressed: () {
+                if (!_formKey.currentState!.validate()) return;
                 ref.read(loginProvider.notifier).signIn(context);
               },
             ),

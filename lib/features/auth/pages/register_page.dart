@@ -12,6 +12,7 @@ class RegisterPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final registerState = ref.watch(registerProvider);
     final locale = AppLocalizations.of(context)!;
+    final _formKey = GlobalKey<FormState>();
 
     return Scaffold(
       appBar: AppBar(
@@ -23,25 +24,43 @@ class RegisterPage extends ConsumerWidget {
           children: [
             const Expanded(child: SizedBox()),
             const _RegisterResultMessage(),
-            AppInputField(
-              hint: locale.name,
-              controller: ref.read(registerProvider.notifier).nameController,
-            ),
-            AppInputField(
-              hint: 'E-mail',
-              controller: ref.read(registerProvider.notifier).emailController,
-            ),
-            AppInputField(
-              hint: locale.password,
-              isObscure: true,
-              controller:
-                  ref.read(registerProvider.notifier).passwordController,
+            Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  AppInputField(
+                    hint: locale.name,
+                    controller:
+                        ref.read(registerProvider.notifier).nameController,
+                    hasDefaultValidator: true,
+                    defaultValidatorErrorMessage:
+                        '${locale.enter} ${locale.name}',
+                  ),
+                  AppInputField(
+                    hint: 'E-mail',
+                    controller:
+                        ref.read(registerProvider.notifier).emailController,
+                    hasDefaultValidator: true,
+                    defaultValidatorErrorMessage: '${locale.enter} e-mail',
+                  ),
+                  AppInputField(
+                    hint: locale.password,
+                    isObscure: true,
+                    controller:
+                        ref.read(registerProvider.notifier).passwordController,
+                    hasDefaultValidator: true,
+                    defaultValidatorErrorMessage:
+                        '${locale.enter} ${locale.password}',
+                  ),
+                ],
+              ),
             ),
             SafeArea(
               child: AppButton(
                 label: locale.register,
                 loading: registerState is AsyncLoading,
                 onPressed: () {
+                  if (!_formKey.currentState!.validate()) return;
                   ref.read(registerProvider.notifier).registerAccount(context);
                 },
               ),

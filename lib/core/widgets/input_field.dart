@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myarchapp/core/utils/ui.dart';
 
 class AppInputField extends StatelessWidget {
   const AppInputField({
@@ -8,6 +9,9 @@ class AppInputField extends StatelessWidget {
     this.controller,
     this.onSubmitted,
     this.isObscure = false,
+    this.validator,
+    this.hasDefaultValidator = false,
+    this.defaultValidatorErrorMessage = '',
   }) : super(key: key);
 
   final String hint;
@@ -15,37 +19,59 @@ class AppInputField extends StatelessWidget {
   final TextEditingController? controller;
   final bool isObscure;
   final Function(String)? onSubmitted;
-
+  final String? Function(String?)? validator;
+  final bool hasDefaultValidator;
+  final String defaultValidatorErrorMessage;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 40,
-      alignment: Alignment.center,
-      margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-      decoration: BoxDecoration(
-        color: Theme.of(context).cardColor,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: Colors.grey,
-        ),
-      ),
-      child: TextField(
-        onSubmitted: onSubmitted,
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: AppShapes.padding / 2),
+      child: TextFormField(
+        onFieldSubmitted: onSubmitted,
         cursorColor: Theme.of(context).textSelectionTheme.cursorColor,
         cursorWidth: 1,
         onChanged: onChanged,
         controller: controller,
         textAlignVertical: TextAlignVertical.center,
         obscureText: isObscure,
+        validator: hasDefaultValidator
+            ? (value) {
+                if (value == null || value.trim().isEmpty) {
+                  return defaultValidatorErrorMessage;
+                }
+                return null;
+              }
+            : validator,
         decoration: InputDecoration(
+          contentPadding: const EdgeInsets.all(AppShapes.padding),
           hintText: hint,
-          border: InputBorder.none,
-          focusedBorder: InputBorder.none,
-          enabledBorder: InputBorder.none,
-          errorBorder: InputBorder.none,
-          disabledBorder: InputBorder.none,
-          contentPadding: const EdgeInsets.only(left: 10),
+          isDense: true,
+          errorStyle: TextStyle(
+            color: Theme.of(context).errorColor,
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(),
+            borderRadius: BorderRadius.circular(AppShapes.borderRadius),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.red),
+            borderRadius: BorderRadius.circular(AppShapes.borderRadius),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.red),
+            borderRadius: BorderRadius.circular(AppShapes.borderRadius),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.grey),
+            borderRadius: BorderRadius.circular(AppShapes.borderRadius),
+          ),
+          disabledBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.grey),
+            borderRadius: BorderRadius.circular(AppShapes.borderRadius),
+          ),
+          floatingLabelStyle:
+              TextStyle(color: Theme.of(context).textTheme.bodyText2?.color),
           isCollapsed: true,
         ),
       ),

@@ -21,7 +21,7 @@ class AppButton extends StatelessWidget {
         primary: AppColors.accent,
         elevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(AppShapes.borderRadius),
         ),
       ),
       onPressed: loading ? null : onPressed,

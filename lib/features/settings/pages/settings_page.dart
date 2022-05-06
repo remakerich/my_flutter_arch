@@ -72,7 +72,7 @@ class _SignOutBottomSheet extends ConsumerWidget {
 
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(AppShapes.padding),
         child: ListTile(
           shape: AppShapes.listTileShape,
           leading: const Icon(
@@ -106,7 +106,12 @@ class _SettingItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+      padding: const EdgeInsets.fromLTRB(
+        AppShapes.padding,
+        AppShapes.padding,
+        AppShapes.padding,
+        0,
+      ),
       child: ListTile(
         tileColor: Theme.of(context).cardColor,
         shape: AppShapes.listTileShape,
@@ -138,7 +143,12 @@ class _SettingWithBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+      padding: const EdgeInsets.fromLTRB(
+        AppShapes.padding,
+        AppShapes.padding,
+        AppShapes.padding,
+        0,
+      ),
       child: ListTile(
         tileColor: Theme.of(context).cardColor,
         shape: AppShapes.listTileShape,

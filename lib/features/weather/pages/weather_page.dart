@@ -20,7 +20,7 @@ class WeatherPage extends ConsumerWidget {
           children: [
             Row(
               children: [
-                const SizedBox(width: 10),
+                const SizedBox(width: AppShapes.padding),
                 Expanded(
                   child: AppInputField(
                     hint: 'Enter city',
@@ -81,7 +81,7 @@ class _WeatherInfo extends StatelessWidget {
             clear: () => AppAssets.sun,
           ),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: AppShapes.padding),
         Text(
           weather.city,
           style: const TextStyle(
@@ -89,7 +89,7 @@ class _WeatherInfo extends StatelessWidget {
             fontWeight: FontWeight.w800,
           ),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: AppShapes.padding),
         Text(
           '${weather.temperature}°C',
           style: const TextStyle(fontSize: 30),

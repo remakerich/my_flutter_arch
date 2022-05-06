@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:myarchapp/core/utils/ui.dart';
 import 'package:myarchapp/core/widgets/input_field.dart';
 import 'package:myarchapp/features/chat/models/message.dart';
 import 'package:myarchapp/features/chat/providers/chat_provider.dart';
@@ -60,7 +61,7 @@ class _MessagesList extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
             CupertinoActivityIndicator(),
-            SizedBox(height: 10),
+            SizedBox(height: AppShapes.padding),
             Text(
               'Please make sure\nchat server is running.\n\n'
               'Please note: This feature can only\n'
@@ -93,7 +94,12 @@ class _Message extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+      padding: const EdgeInsets.fromLTRB(
+        AppShapes.padding,
+        0,
+        AppShapes.padding,
+        AppShapes.padding,
+      ),
       child: Row(
         mainAxisAlignment:
             isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
@@ -102,13 +108,13 @@ class _Message extends StatelessWidget {
             Text(
               '${message.user}:',
             ),
-            const SizedBox(width: 10),
+            const SizedBox(width: AppShapes.padding),
           },
           Container(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(AppShapes.padding),
             decoration: BoxDecoration(
               color: isMe ? Colors.green : Colors.grey,
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(AppShapes.borderRadius),
             ),
             child: Row(
               children: [
@@ -139,7 +145,7 @@ class _InputArea extends ConsumerWidget {
     return SafeArea(
       child: Row(
         children: [
-          const SizedBox(width: 10),
+          const SizedBox(width: AppShapes.padding),
           Expanded(
             flex: 1,
             child: AppInputField(
@@ -149,7 +155,7 @@ class _InputArea extends ConsumerWidget {
               },
             ),
           ),
-          const SizedBox(width: 10),
+          const SizedBox(width: AppShapes.padding),
           Expanded(
             flex: 2,
             child: AppInputField(
@@ -158,7 +164,7 @@ class _InputArea extends ConsumerWidget {
             ),
           ),
           Container(
-            margin: const EdgeInsets.all(10),
+            margin: const EdgeInsets.all(AppShapes.padding),
             child: GestureDetector(
               child: const Icon(
                 Icons.keyboard_double_arrow_up_rounded,

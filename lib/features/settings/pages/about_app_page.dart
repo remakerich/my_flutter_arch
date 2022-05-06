@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:myarchapp/core/utils/ui.dart';
 import 'package:myarchapp/features/settings/providers/app_version_provider.dart';
 
 class AboutAppPage extends ConsumerWidget {
@@ -17,7 +18,7 @@ class AboutAppPage extends ConsumerWidget {
         title: Text(locale.aboutApp),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(AppShapes.padding),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

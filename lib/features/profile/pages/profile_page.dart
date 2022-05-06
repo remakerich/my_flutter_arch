@@ -35,7 +35,7 @@ class ProfilePage extends ConsumerWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: AppShapes.padding),
                 Text(
                   name,
                   style: const TextStyle(fontSize: 18),

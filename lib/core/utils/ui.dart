@@ -53,12 +53,16 @@ abstract class AppTheme {
 abstract class AppShapes {
   static const bottomSheetShape = RoundedRectangleBorder(
     borderRadius: BorderRadius.only(
-      topLeft: Radius.circular(12),
-      topRight: Radius.circular(12),
+      topLeft: Radius.circular(AppShapes.borderRadius),
+      topRight: Radius.circular(AppShapes.borderRadius),
     ),
   );
 
   static final listTileShape = RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(12),
+    borderRadius: BorderRadius.circular(AppShapes.borderRadius),
   );
+
+  static const borderRadius = 12.0;
+
+  static const padding = 10.0;
 }

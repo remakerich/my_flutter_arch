@@ -35,7 +35,7 @@ class NavigationPage extends ConsumerWidget {
             child: SizedBox(
               child: Row(
                 children: [
-                  const SizedBox(width: 10),
+                  const SizedBox(width: AppShapes.padding),
                   _BottomNavBarItem(
                     onSelected: () {
                       HapticFeedback.mediumImpact();
@@ -61,7 +61,7 @@ class NavigationPage extends ConsumerWidget {
                     isSelected: bottomNavigationState == 2,
                     icon: CupertinoIcons.profile_circled,
                   ),
-                  const SizedBox(width: 10),
+                  const SizedBox(width: AppShapes.padding),
                 ],
               ),
             ),

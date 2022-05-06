@@ -26,7 +26,7 @@ class AppInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: AppShapes.padding / 2),
+      padding: const EdgeInsets.symmetric(vertical: AppShapes.padding ),
       child: TextFormField(
         onFieldSubmitted: onSubmitted,
         cursorColor: Theme.of(context).textSelectionTheme.cursorColor,

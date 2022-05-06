@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myarchapp/core/widgets/app_button.dart';
 import 'package:myarchapp/core/widgets/input_field.dart';
+import 'package:myarchapp/core/widgets/smooth_transition_appbar.dart';
 import 'package:myarchapp/features/auth/providers/register_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -15,8 +16,8 @@ class RegisterPage extends ConsumerWidget {
     final _formKey = GlobalKey<FormState>();
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(locale.register),
+      appBar: SmoothTransitionAppBar(
+        title: locale.register,
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),

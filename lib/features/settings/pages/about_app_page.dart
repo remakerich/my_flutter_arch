@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myarchapp/core/utils/ui.dart';
+import 'package:myarchapp/core/widgets/smooth_transition_appbar.dart';
 import 'package:myarchapp/features/settings/providers/app_version_provider.dart';
 
 class AboutAppPage extends ConsumerWidget {
@@ -14,8 +15,8 @@ class AboutAppPage extends ConsumerWidget {
     final appVersionState = ref.watch(appVersionProvider);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(locale.aboutApp),
+      appBar: SmoothTransitionAppBar(
+        title: locale.aboutApp,
       ),
       body: Padding(
         padding: const EdgeInsets.all(AppShapes.padding),

@@ -1,0 +1,14 @@
+# flutter pub run flutter_native_splash:create
+flutter_native_splash:
+  color: "#ffffff"
+  color_dark: "#1a1a1a"
+  image: assets/system/logo.png
+  image_dark: assets/system/logo.png
+  android_12:
+    image: assets/system/android12_logo.png
+    image_dark: assets/system/android12_logo.png
+    icon_background_color: "#ffffff"
+    icon_background_color_dark: "#1a1a1a"
+  android: true
+  android_gravity: fill
+  ios: true

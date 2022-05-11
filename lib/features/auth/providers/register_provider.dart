@@ -30,6 +30,7 @@ class RegisterNotifier extends StateNotifier<AsyncValue<bool>> {
     nameController.dispose();
     emailController.dispose();
     passwordController.dispose();
+    phoneController.dispose();
     super.dispose();
   }
 

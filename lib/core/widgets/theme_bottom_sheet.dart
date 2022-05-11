@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myarchapp/core/utils/ui.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:myarchapp/core/l10n/localization.dart';
 import 'package:myarchapp/features/settings/providers/theme_provider.dart';
 
 class ThemeBottomSheet extends ConsumerWidget {

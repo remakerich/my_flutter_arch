@@ -2,8 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myarchapp/core/router/router.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:myarchapp/core/utils/ui.dart';
+import 'package:myarchapp/core/l10n/localization.dart';
 
 class ChatListPage extends ConsumerWidget {
   const ChatListPage({Key? key}) : super(key: key);

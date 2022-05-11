@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myarchapp/core/utils/ui.dart';
 import 'package:myarchapp/core/widgets/input_field.dart';
+import 'package:myarchapp/core/l10n/localization.dart';
 import 'package:myarchapp/core/widgets/smooth_transition_appbar.dart';
 import 'package:myarchapp/features/chat/models/message.dart';
 import 'package:myarchapp/features/chat/providers/chat_provider.dart';
 import 'package:myarchapp/features/chat/providers/message_provider.dart';
 import 'package:myarchapp/features/chat/providers/user_name_provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChatPage extends StatelessWidget {
   const ChatPage({Key? key}) : super(key: key);

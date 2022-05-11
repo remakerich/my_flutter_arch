@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:myarchapp/core/utils/ui.dart';
 
 class AppInputField extends StatelessWidget {
@@ -12,6 +13,7 @@ class AppInputField extends StatelessWidget {
     this.validator,
     this.hasDefaultValidator = false,
     this.defaultValidatorErrorMessage = '',
+    this.inputFormatters = const [],
   }) : super(key: key);
 
   final String hint;
@@ -22,11 +24,12 @@ class AppInputField extends StatelessWidget {
   final String? Function(String?)? validator;
   final bool hasDefaultValidator;
   final String defaultValidatorErrorMessage;
+  final List<TextInputFormatter>? inputFormatters;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: AppShapes.padding ),
+      padding: const EdgeInsets.symmetric(vertical: AppShapes.padding),
       child: TextFormField(
         onFieldSubmitted: onSubmitted,
         cursorColor: Theme.of(context).textSelectionTheme.cursorColor,
@@ -35,6 +38,8 @@ class AppInputField extends StatelessWidget {
         controller: controller,
         textAlignVertical: TextAlignVertical.center,
         obscureText: isObscure,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        inputFormatters: inputFormatters,
         validator: hasDefaultValidator
             ? (value) {
                 if (value == null || value.trim().isEmpty) {

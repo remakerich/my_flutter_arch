@@ -7,10 +7,10 @@ import 'package:myarchapp/core/widgets/app_button.dart';
 import 'package:myarchapp/core/widgets/app_text_button.dart';
 import 'package:myarchapp/core/widgets/input_field.dart';
 import 'package:myarchapp/core/widgets/language_bottom_sheet.dart';
+import 'package:myarchapp/core/l10n/localization.dart';
 import 'package:myarchapp/core/widgets/smooth_transition_appbar.dart';
 import 'package:myarchapp/features/auth/providers/login_provider.dart';
 import 'package:myarchapp/features/auth/providers/register_provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginPage extends ConsumerWidget {
   const LoginPage({Key? key}) : super(key: key);

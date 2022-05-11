@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myarchapp/core/utils/ui.dart';
+import 'package:myarchapp/core/l10n/localization.dart';
 import 'package:myarchapp/features/settings/providers/language_provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LanguageBottomSheet extends ConsumerWidget {
   const LanguageBottomSheet({Key? key}) : super(key: key);

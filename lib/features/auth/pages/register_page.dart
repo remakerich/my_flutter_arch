@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:myarchapp/core/widgets/app_button.dart';
 import 'package:myarchapp/core/widgets/input_field.dart';
+import 'package:myarchapp/core/l10n/localization.dart';
 import 'package:myarchapp/core/widgets/smooth_transition_appbar.dart';
 import 'package:myarchapp/features/auth/providers/register_provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RegisterPage extends ConsumerWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -36,6 +37,16 @@ class RegisterPage extends ConsumerWidget {
                     hasDefaultValidator: true,
                     defaultValidatorErrorMessage:
                         '${locale.enter} ${locale.name}',
+                  ),
+                  AppInputField(
+                    hint: 'Phone',
+                    controller:
+                        ref.read(registerProvider.notifier).phoneController,
+                    inputFormatters: [
+                      MaskTextInputFormatter(
+                        mask: '+# (###) ###-##-##',
+                      ),
+                    ],
                   ),
                   AppInputField(
                     hint: 'E-mail',

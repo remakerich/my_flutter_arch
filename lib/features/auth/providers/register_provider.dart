@@ -23,6 +23,7 @@ class RegisterNotifier extends StateNotifier<AsyncValue<bool>> {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final phoneController = TextEditingController();
 
   @override
   void dispose() {

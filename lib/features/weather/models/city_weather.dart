@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:myarchapp/features/weather/models/weather_type.dart';
-import 'package:myarchapp/features/weather/models/weather_type_converter.dart';
 
 part 'city_weather.freezed.dart';
 

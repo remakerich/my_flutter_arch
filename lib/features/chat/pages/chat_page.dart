@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myarchapp/core/utils/ui.dart';
+import 'package:myarchapp/core/widgets/easter_egg.dart';
 import 'package:myarchapp/core/widgets/input_field.dart';
 import 'package:myarchapp/core/l10n/localization.dart';
-import 'package:myarchapp/core/widgets/smooth_transition_appbar.dart';
 import 'package:myarchapp/features/chat/models/message.dart';
 import 'package:myarchapp/features/chat/providers/chat_provider.dart';
 import 'package:myarchapp/features/chat/providers/message_provider.dart';
@@ -18,15 +18,16 @@ class ChatPage extends StatelessWidget {
     final locale = AppLocalizations.of(context)!;
 
     return Scaffold(
-      appBar: SmoothTransitionAppBar(
-        title: locale.chatRoom,
+      appBar: AppBar(
+        title: Text(locale.chatRoom),
       ),
       body: Column(
         children: const [
           Expanded(
             child: _MessagesList(),
           ),
-          _InputArea()
+          _InputArea(),
+          EasterEgg(),
         ],
       ),
     );

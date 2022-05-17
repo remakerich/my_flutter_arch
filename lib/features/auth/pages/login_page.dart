@@ -5,10 +5,10 @@ import 'package:myarchapp/core/router/router.dart';
 import 'package:myarchapp/core/utils/ui.dart';
 import 'package:myarchapp/core/widgets/app_button.dart';
 import 'package:myarchapp/core/widgets/app_text_button.dart';
+import 'package:myarchapp/core/widgets/easter_egg.dart';
 import 'package:myarchapp/core/widgets/input_field.dart';
 import 'package:myarchapp/core/widgets/language_bottom_sheet.dart';
 import 'package:myarchapp/core/l10n/localization.dart';
-import 'package:myarchapp/core/widgets/smooth_transition_appbar.dart';
 import 'package:myarchapp/features/auth/providers/login_provider.dart';
 import 'package:myarchapp/features/auth/providers/register_provider.dart';
 
@@ -22,8 +22,8 @@ class LoginPage extends ConsumerWidget {
     final _formKey = GlobalKey<FormState>();
 
     return Scaffold(
-      appBar: SmoothTransitionAppBar(
-        title: locale.login,
+      appBar: AppBar(
+        title: Text(locale.login),
         actions: [
           IconButton(
             onPressed: () {
@@ -87,7 +87,8 @@ class LoginPage extends ConsumerWidget {
                   ),
                 ],
               ),
-            )
+            ),
+            const EasterEgg(),
           ],
         ),
       ),

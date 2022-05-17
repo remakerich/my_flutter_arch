@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myarchapp/core/utils/ui.dart';
 import 'package:myarchapp/core/l10n/localization.dart';
-import 'package:myarchapp/core/widgets/smooth_transition_appbar.dart';
 import 'package:myarchapp/features/settings/providers/app_version_provider.dart';
 
 class AboutAppPage extends ConsumerWidget {
@@ -15,8 +14,8 @@ class AboutAppPage extends ConsumerWidget {
     final appVersionState = ref.watch(appVersionProvider);
 
     return Scaffold(
-      appBar: SmoothTransitionAppBar(
-        title: locale.aboutApp,
+      appBar: AppBar(
+        title: Text(locale.aboutApp),
       ),
       body: Padding(
         padding: const EdgeInsets.all(AppShapes.padding),
@@ -34,7 +33,7 @@ class AboutAppPage extends ConsumerWidget {
               loading: () => const CupertinoActivityIndicator(),
             ),
             _SectionHeader(locale.historyOfChanges),
-            Text(locale.changelog)
+            Text(locale.changelog),
           ],
         ),
       ),

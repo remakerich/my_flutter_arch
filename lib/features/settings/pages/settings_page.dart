@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myarchapp/core/router/router.dart';
 import 'package:myarchapp/core/utils/ui.dart';
+import 'package:myarchapp/core/widgets/easter_egg.dart';
 import 'package:myarchapp/core/widgets/language_bottom_sheet.dart';
 import 'package:myarchapp/core/l10n/localization.dart';
-import 'package:myarchapp/core/widgets/smooth_transition_appbar.dart';
 import 'package:myarchapp/core/widgets/theme_bottom_sheet.dart';
 import 'package:myarchapp/features/auth/providers/login_provider.dart';
 import 'package:myarchapp/features/settings/providers/language_provider.dart';
@@ -23,8 +23,8 @@ class SettingsPage extends ConsumerWidget {
     final isLightTheme = Theme.of(context).brightness == Brightness.light;
 
     return Scaffold(
-      appBar: SmoothTransitionAppBar(
-        title: locale.settings,
+      appBar: AppBar(
+        title: Text(locale.settings),
       ),
       body: ListView(
         children: [
@@ -58,6 +58,7 @@ class SettingsPage extends ConsumerWidget {
             },
             icon: const Icon(Icons.logout),
           ),
+          // const EasterEgg(),
         ],
       ),
     );

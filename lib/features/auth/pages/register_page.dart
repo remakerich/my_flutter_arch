@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:myarchapp/core/widgets/app_button.dart';
+import 'package:myarchapp/core/widgets/easter_egg.dart';
 import 'package:myarchapp/core/widgets/input_field.dart';
 import 'package:myarchapp/core/l10n/localization.dart';
-import 'package:myarchapp/core/widgets/smooth_transition_appbar.dart';
 import 'package:myarchapp/features/auth/providers/register_provider.dart';
 
 class RegisterPage extends ConsumerWidget {
@@ -17,8 +17,8 @@ class RegisterPage extends ConsumerWidget {
     final _formKey = GlobalKey<FormState>();
 
     return Scaffold(
-      appBar: SmoothTransitionAppBar(
-        title: locale.register,
+      appBar: AppBar(
+        title: Text(locale.register),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -64,6 +64,7 @@ class RegisterPage extends ConsumerWidget {
                     defaultValidatorErrorMessage:
                         '${locale.enter} ${locale.password}',
                   ),
+                  const EasterEgg(),
                 ],
               ),
             ),

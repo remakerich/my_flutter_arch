@@ -1,12 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:myarchapp/features/auth/pages/auth_page.dart';
-import 'package:myarchapp/features/auth/pages/login_page.dart';
-import 'package:myarchapp/features/auth/pages/register_page.dart';
-import 'package:myarchapp/features/chat/pages/chat_page.dart';
-import 'package:myarchapp/features/navigation/pages/navigation_page.dart';
-import 'package:myarchapp/features/settings/pages/about_app_page.dart';
-import 'package:myarchapp/features/settings/pages/settings_page.dart';
+import 'package:myarchapp/modules/auth/views/auth_page.dart';
+import 'package:myarchapp/modules/auth/views/login_page.dart';
+import 'package:myarchapp/modules/auth/views/register_page.dart';
+import 'package:myarchapp/modules/chat/views/chat_page.dart';
+import 'package:myarchapp/modules/navigation/views/navigation_page.dart';
+import 'package:myarchapp/modules/settings/views/about_app_page.dart';
+import 'package:myarchapp/modules/settings/views/settings_page.dart';
 
 part 'router.gr.dart';
 

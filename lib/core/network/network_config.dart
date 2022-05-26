@@ -5,5 +5,5 @@ class NetworkConfig {
       Platform.isAndroid ? 'ws://10.0.2.2:4000' : 'ws://localhost:4000';
 
   static const String weatherApiUrl =
-      'https://api.openweathermap.org/data/2.5/weather';
+      'http://api.openweathermap.org/data/2.5/weather';
 }

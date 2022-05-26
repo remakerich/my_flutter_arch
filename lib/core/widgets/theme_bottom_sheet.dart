@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myarchapp/core/utils/ui.dart';
 import 'package:myarchapp/core/l10n/localization.dart';
-import 'package:myarchapp/features/settings/providers/theme_provider.dart';
+import 'package:myarchapp/modules/settings/controllers/theme_provider.dart';
 
 class ThemeBottomSheet extends ConsumerWidget {
   const ThemeBottomSheet({Key? key}) : super(key: key);

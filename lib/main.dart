@@ -5,9 +5,9 @@ import 'package:myarchapp/core/injection/injection.dart';
 import 'package:myarchapp/core/router/router.dart';
 import 'package:myarchapp/core/utils/ui.dart';
 import 'package:myarchapp/core/l10n/localization.dart';
-import 'package:myarchapp/features/auth/providers/login_provider.dart';
-import 'package:myarchapp/features/settings/providers/language_provider.dart';
-import 'package:myarchapp/features/settings/providers/theme_provider.dart';
+import 'modules/auth/controllers/login_provider.dart';
+import 'modules/settings/controllers/language_provider.dart';
+import 'modules/settings/controllers/theme_provider.dart';
 
 void main() async {
   await initializeDependencies();

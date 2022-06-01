@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
 import 'package:myarchapp/core/exceptions/either.dart';
@@ -22,7 +20,7 @@ class LanguageStorage {
     return handleExceptions(
       () => _secureStorage.write(
         key: key,
-        value: jsonEncode(language),
+        value: language,
       ),
     );
   }
@@ -30,8 +28,8 @@ class LanguageStorage {
   Future<Either<Failure, String>> getLanguage() {
     return handleExceptions(
       () async {
-        final result = await _secureStorage.read(key: key);
-        return result!.replaceAll('"', '');
+        final result = await _secureStorage.read(key: key) ?? '';
+        return result;
       },
     );
   }
